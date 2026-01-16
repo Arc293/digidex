@@ -1,0 +1,60 @@
+{
+    "general": [
+        {
+            "artists": "\\n"
+        },
+        {
+            "levels": "\\n"
+        },
+        {
+            "types": "\\n"
+        },
+        {
+            "attributes": "\\n"
+        },
+        {
+            "families": "\\n"
+        }
+    ],
+    "card_info": {
+        "previous_card_number": "\\n",
+        "next_card_number": "\\n",
+        "year_of_release": "\\n"
+    },
+    "stats": {
+        "appearance_cost": "\\n",
+        "plus_dp": "\\n",
+        "evolution_cost": "\\n",
+        "hp": "\\n"
+    },
+    "attacks": [
+        {
+            "name": "\\n",
+            "type": "\\n",
+            "power": "\\n"
+        },
+        {
+            "name": "\\n",
+            "power": "\\n"
+        },
+        {
+            "power": "\\n"
+        }
+    ],
+    "evolution_info": [
+        {
+            "to": "\\n"
+        },
+        {
+            "to": "\\n"
+        },
+        {
+            "to": "\\n"
+        }
+    ],
+    "special_abilities": [
+        {
+            "effect": "\\n"
+        }
+    ]
+}

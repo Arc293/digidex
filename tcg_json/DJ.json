@@ -1,0 +1,15 @@
+{
+    "general": [
+        {
+            "names": "{{{name"
+        }
+    ],
+    "card_info": {
+        "previous_card_number": "\\n",
+        "next_card_number": "\\n",
+        "mspg": "{{{mspg"
+    },
+    "stats": {
+        "attack_support_guard": "{{{asg"
+    }
+}

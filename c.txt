@@ -1,0 +1,1615 @@
+1 S2
+ =====================
+featured |featured=   
+
+drbentry |drbentry=
+
+name |name=Agnimon, also spelled Agunimon
+
+kan |kan=アグニモン
+
+rom |rom=Agunimon
+
+aln |aln=「」 — "Human Warrior of Fire" 
+
+develn |develn=「」 — Ifrimon
+
+dub |dub=Agunimon 
+
+dref |dref=Digimon Frontier (English dub): "All Aboard"
+
+dub2 |dub2=Agnimon
+
+dref2 |dref2=
+
+da |da=
+
+da2 |da2=
+
+image |image=Agnimon3.jpg
+
+imagesize |imagesize=
+
+l1 |l1=Hybrid 
+
+l1ref |l1ref=
+
+l2 |l2=Adult
+
+l2ref |l2ref=
+
+l3 |l3=Perfect
+
+l3ref |l3ref=Digimon World -next 0rder-
+
+l4 |l4=Child
+
+l4ref |l4ref=Digimon Pendulum Z
+
+c |c=Adult
+
+cref |cref=
+
+a1 |a1=Free
+
+a1ref |a1ref=
+
+a2 |a2=Vaccine
+
+a2ref |a2ref=
+
+a3 |a3=Variable
+
+a3ref |a3ref=
+
+a4 |a4=Unknown
+
+a4ref |a4ref=
+
+t1 |t1=Demon Man
+
+t1ref |t1ref=
+
+f1 |f1=Dragon's Roar
+
+f1ref |f1ref=
+
+f2 |f2=Nature Spirits
+
+f2ref |f2ref=
+
+f3 |f3=Nightmare Soldiers
+
+f3ref |f3ref=
+
+f4 |f4=Deep Savers
+
+f4ref |f4ref=
+
+pn |pn=DRB
+
+pe |pe=A Digimon that possesses power over Flame which bears the might of one of the legendary Warrior Ten. Because its "Digicore" is wrapped in the  which is called a holy blaze, it is able to freely manipulate flames. It is an incarnation of the "Firewall" that defends the Net, and is also a guardian deity. Because of its easily fired-up personality, it has a soldier-like aspect that practices mental training with  exercises, and its way of speaking is somewhat archaic, like a  artist. In battle, it fights by freely using Oriental martial arts, and accumulates flames at one point of its body with a trick that focuses its spirit, to raise its offensive ability. Its Special Moves are unleashing a blazing dragon from its flame-clad fist ( ), and unleashing a whirlwind kick of flames ().
+
+pj |pj=伝説の十闘士の力を宿した、火の能力を持つデジモン。「デジコア（電脳核）」が聖なる炎と呼ばれるで包まれているため、炎を自在に操ることができる。ネットの防御壁「ファイアーウォール」の化身であり、守護神でもある。熱しやすい性格なため、ヨガ呼吸で精神修養に励む武人的な一面があり、話し言葉は、どこか古風で拳法家的。戦闘では東洋の武術を駆使して戦い、気を集中させる要領で身体の一ヶ所に炎を集めて攻撃力を上げる。必殺技は炎で包まれた拳から火炎竜を繰り出す『』と、火炎の旋風脚を繰り出す『』。
+
+pu |pu=agnimon
+
+pn2 |pn2=DL
+
+pe2 |pe2=
+
+pj2 |pj2=伝説の十闘士の力を宿した、火の能力を持つデジモン。「デジコア（電脳核）」が聖なる炎と呼ばれるスピリチュアルファイーで包まれているため、炎を自在に操ることができる。ネットの防御壁「ファイアーウォール」の化身であり、守護神でもある。熱しやすい性格なため、ヨガ呼吸で精神修に励む武人的な一面があり、話し言葉は、どこか古風で拳法家的。戦闘では東洋の武術を駆使して戦い、気を集中させる要領で身体の一ヶ所に炎を集めて攻撃力を上げる。必殺技は炎で包まれた拳から火炎竜を繰り出す『』と、火炎の旋風脚を繰り出す『』。
+
+pu2 |pu2=YXti7JI7Ics%3D
+
+pn3 |pn3=Video Games
+
+pn3a |pn3a=Bandai Games
+
+pn3a1 |pn3a1=Battle Chronicle
+
+pun3a1 |pun3a1=Bandai Games Digimon Battle Chronicle
+
+pe3a1 |pe3a1=Evolving from Kanbara Takuya, it is a Digimon that has inherited the power of Ancient Greymon, one of the legendary Warrior Ten. It specializes in grappling techniques, and is able to control fire freely.
+
+pj3a1 |pj3a1=神原拓也（かんばらたくや）が進化し、伝説の十闘士「エンシェントグレイモン」の力を受け継いだデジモン。炎を自在に操ることが可能で、格闘技が得意。
+
+pu3a1 |pu3a1=http://www.bandaigames.channel.or.jp/list/digi_battle/chara4.html
+
+pn3a2 |pn3a2=Adventure
+
+pun3a2 |pun3a2=Bandai Games Digimon Adventure
+
+pe3a2 |pe3a2=A Digimon that evolves from Takuya, it is one of the legendary Warrior Ten who carries the Spirit of Fire. Its Special Move is shooting flame dragons from both arms ( ).
+
+pj3a2 |pj3a2=炎のスピリットを持つ伝説の十闘士の1人で、 拓也が進化したデジモン。必殺技は両腕から炎の竜を飛ばす。
+
+pu3a2 |pu3a2=http://www.bandaigames.channel.or.jp/list/digimon_game/adventure/hero03.html
+
+pn3b |pn3b=Super Xros Wars
+
+pun3b |pun3b=Digimon Story: Super Xros Wars
+
+pe3b |pe3b=A Digimon that possesses power over Flame which bears the might of one of the legendary Warrior Ten. Because its "Digicore" is wrapped in the  which is called a holy blaze, it is able to freely manipulate flames. It is an incarnation of the "Firewall", and is a guardian deity.
+
+pj3b |pj3b=でんせつの　10とうしの　ちからを　やどした火の　のうりょくを　もつデジモン「デジコア」が　聖なる　ホノオと　よばれるで　つつまれているためホノオを　じざいに　あやつることが　できる「ファイアーウォール」の　けしんであり　しゅごしんである
+
+pu3b |pu3b=
+
+pn4 |pn4=Misc
+
+pun4 |pun4=Digimon Web Official Twitter
+
+pe4 |pe4=A Digimon that possesses power over Flame which bears the might of one of the legendary Warrior Ten. It is an incarnation of the "Firewall" that defends the Net, and is also a guardian deity. In battle, it fights by freely using Oriental martial arts, and accumulates flames at one point of its body with a trick that focuses its spirit, to raise its offensive ability. 
+
+pj4 |pj4=伝説の十闘士の力を宿した火の能力を持つデジモン。ネットの防御壁「ファイアーウォール」の化身であり、守護神でもある。戦闘では東洋の武術を駆使して戦い、気を集中させる要領で身体の一ヶ所に炎を集めて攻撃力を上げる。
+
+pu4 |pu4=https://twitter.com/bandai_digimon/status/1209300321652002818
+
+ety |ety= 1}   (अग्नि)  is the Hindu and Vedic god of fire, as well as the guardian of humanity. He is one of the three chief gods in the Rigveda, personifying fire and was at the center of ancient worship. The fire altar was orientated towards the East, the direction of sunrise, the ever new beginning. Agni is said to exist at three levels, on earth as fire, in the atmosphere as lightning, and in the sky as the sun, and so acts as a mediator between gods and men. He also cleanses sins after death and bestows immortality. 2}  Sanskrit for "fire".
+ From  , a being from popular Arabic mythology that is generally considered to be a type of genius. It is endowed with great power and is able to perform both benign and malignant actions.
+
+ 
+  A direct romanization of .
+
+yd |yd=2002
+
+ydr |ydr=
+
+drbed |drbed=June 8
+
+drbedy |drbedy=2012
+
+ad |ad=
+
+vd |vd=
+
+cd |cd=Bo-655
+
+2 FArticle2 =====================
+1 |35
+3 DRBEntry =====================
+1 |538
+4 ref =====================
+1 |
+5 url =====================
+1 |http://www.toei-anim.co.jp/tv/digimon_xw/news.html
+2 |Toei Animation's official Digimon Xros Wars website
+6 j2 =====================
+1 |火の人闘士
+2 |Hi no Hito Tōshi
+7 j2 =====================
+1 |イフリーモン
+2 |Ifurīmon
+8 ref =====================
+1 |https://twitter.com/bandai_digimon/status/1102408850701840385
+9 ref =====================
+1 |Digimon Masters
+10 DigiAlph =====================
+1 |a
+2 |gu
+3 |ni
+4 |mon
+11 DigiAlph2 =====================
+1 |a
+2 |g
+3 |n
+4 |i
+5 |mon
+12 DD =====================
+1 |a
+13 rfc =====================
+1 |Bo
+2 |1208
+14 rfc =====================
+1 |Bo
+2 |1208
+15 DD =====================
+1 |a
+16 DD =====================
+1 |a
+17 rfc =====================
+1 |Da
+2 |557
+18 rfc =====================
+1 |Bo
+2 |13L
+19 rfc =====================
+1 |Bo
+2 |1208
+20 ref =====================
+1 |Digimon Pendulum Z
+21 EQ =====================
+1 |Spiritual Fire
+22 w =====================
+1 |yoga
+23 w =====================
+1 |kenpo
+24 AT =====================
+1 |Burning
+25 AT =====================
+w |w=Salamander (legendary creature)
+1 |Salamander
+26 AT =====================
+1 |Salamander Break
+27 EQK =====================
+1 |スピリチュアルファイアー
+28 ATK =====================
+1 |バーニングサラマンダー
+29 ATK =====================
+1 |サラマンダーブレイク
+30 SameProfile =====================
+1 |DRB
+2 |except for the following highlighted differences
+31 FGM =====================
+1 |ヤ
+32 FGM =====================
+1 |行
+33 ATK =====================
+1 |バーニングサラマンダー
+34 ATK =====================
+1 |サラマンダーブレイク
+35 AT =====================
+1 |Burning
+36 AT =====================
+w |w=Salamander (legendary creature)
+1 |Salamander
+37 ATK =====================
+1 |バーニングサラマンダー
+38 EQ =====================
+1 |Spiritual Fire
+39 EQK =====================
+1 |スピリチュアルファイアー
+40 SAN =====================
+41 ETYF =====================
+1 |Agni
+42 noun =====================
+43 ETY =====================
+1 |Agni
+44 ETYK =====================
+1 |
+2 |Aguni
+45 FGM =====================
+1 |アグニ
+46 noun =====================
+47 SUM =====================
+48 ETY =====================
+1 |Ifri
+49 ETY =====================
+1 |t
+50 FGU =====================
+1 |Ifri
+51 ETYK =====================
+1 |ト
+52 FGM =====================
+1 |イフリー
+53 DUB =====================
+54 JPN =====================
+55 SAN =====================
+56 ETYF =====================
+1 |Aguni
+57 noun =====================
+58 ETYK =====================
+1 |アグニ
+2 |Agni
+59 hdr =====================
+1 |Digimon Frontier - Episode 01
+2 |Digimon Frontier: "The Legendary Warrior! Agnimon of Fire"
+60 hdr =====================
+1 |D-Scanner 1.0
+61 T
+ =====================
+name |name=Burning 
+
+ref |ref=
+
+trans |trans=
+
+kan |kan=バーニングサラマンダー
+
+rom |rom=Bāningu Saramandā
+
+d |d=Pyro PunchDigimon Frontier (English dub): "Kumamon Baby, Light My Fire"/Burning Fist/Burning Salamander Attack/Burning Salamander
+
+desc |desc=Unleashes a blazing dragon from its flame-clad fist.
+
+
+name2 |name2=Salamander Break
+
+ref2 |ref2=
+
+trans2 |trans2=
+
+kan2 |kan2=サラマンダーブレイク
+
+rom2 |rom2=Saramandā Bureiku
+
+d2 |d2=Pyro Tornado/Salamander Strike/Salamander Break
+
+desc2 |desc2=Unleashes a whirlwind kick of flames.
+
+
+name3 |name3=Fire Darts
+
+ref3 |ref3=
+
+trans3 |trans3=
+
+kan3 |kan3=ファイアダーツ
+
+rom3 |rom3=Faia Dātsu
+
+d3 |d3=Pyro DartsDigimon Frontier (English dub): "Ladies and Gentlemen: The Beetlemon"/Knife of FlameD-Spirit
+
+desc3 |desc3=Throws small bits of fire from its gauntlet at its target.
+
+
+name4 |name4=Crimson Knuckle
+
+ref4 |ref4=Digimon Frontier: Battle Spirit
+
+trans4 |trans4=
+
+kan4 |kan4=クリムゾンナックル
+
+rom4 |rom4=Kurimuzon Nakkuru
+
+d4 |d4=Pyro TornadoDigimon Rumble Arena 2 (English version)
+
+desc4 |desc4=
+
+
+name5 |name5=Burning Slicer
+
+ref5 |ref5=Digimon Frontier: Battle Spirit
+
+trans5 |trans5=
+
+kan5 |kan5=バーニングスライサー
+
+rom5 |rom5=Bāningu Suraisā
+
+d5 |d5=
+
+desc5 |desc5=A follow up attack from . A chopping attack.
+
+
+name6 |name6=Blaze Shoot
+
+ref6 |ref6=Digimon Frontier: Battle Spirit
+
+trans6 |trans6=
+
+kan6 |kan6=ブレイズシュート
+
+rom6 |rom6=Bureizu Shūto
+
+d6 |d6=
+
+desc6 |desc6=It does a downwards-sloping kick from the air.
+
+
+name7 |name7=Salamander Kick
+
+ref7 |ref7=Digimon Frontier: Battle Spirit
+
+trans7 |trans7=
+
+kan7 |kan7=サラマンライダーキック
+
+rom7 |rom7=Saramandā Kikku
+
+d7 |d7=
+
+desc7 |desc7=Dashes forward and launches a kick covered in dragon-shaped flame.
+
+
+name8 |name8=Gatling Burst
+
+ref8 |ref8=Digimon Frontier: Battle Spirit
+
+trans8 |trans8=
+
+kan8 |kan8=ガトリングバースト
+
+rom8 |rom8=Gatoringu Bāsuto
+
+d8 |d8=
+
+desc8 |desc8=Grabs the opponent and punches repeatedly with one hand.
+
+
+name9 |name9=Million Gatling Burst
+
+ref9 |ref9=Digimon Frontier: Battle Spirit
+
+trans9 |trans9=
+
+kan9 |kan9=ミリオンガトリングバースト
+
+rom9 |rom9=Mirion Gatoringu Bāsuto
+
+d9 |d9=
+
+desc9 |desc9=A stronger version of .
+
+
+name10 |name10=Blaze Gust
+
+ref10 |ref10=Digimon Frontier: Battle Spirit
+
+trans10 |trans10=
+
+kan10 |kan10=ブレイズガスト
+
+rom10 |rom10=Bureizu Gasuto
+
+d10 |d10=
+
+desc10 |desc10=It does a downwards-sloping two-step kick from the air.
+
+
+name11 |name11=Vortex Strike
+
+ref11 |ref11=Digimon Frontier: Battle Spirit
+
+trans11 |trans11=
+
+kan11 |kan11=ボルテックスストライク
+
+rom11 |rom11=Borutekkusu Sutoraiku
+
+d11 |d11=
+
+desc11 |desc11=A follow up attack from . It unleashes a powerful flaming kick.
+
+
+name12 |name12=Fire Dash
+
+ref12 |ref12=Digimon Battle Chronicle
+
+trans12 |trans12=
+
+kan12 |kan12=ファイアダッシュ
+
+rom12 |rom12=Faia Dasshu
+
+d12 |d12=Fire Dash
+
+desc12 |desc12=A high-speed dash, leaving flames in its wake.
+
+
+name13 |name13=Fire Slide
+
+ref13 |ref13=Digimon Battle Chronicle
+
+trans13 |trans13=
+
+kan13 |kan13=ファイアスライド
+
+rom13 |rom13=Faia Suraido
+
+d13 |d13=Fire Slide
+
+desc13 |desc13=A fiery sliding kick.
+
+
+name14 |name14=Elbow Drop
+
+ref14 |ref14=Digimon Battle Chronicle
+
+trans14 |trans14=
+
+kan14 |kan14=エルボードロップ
+
+rom14 |rom14=Erubō Duroppu
+
+d14 |d14=Elbow Drop
+
+desc14 |desc14=Drops from the air to hit an opponent with one elbow.
+
+
+name15 |name15=Shining Burn Slash
+
+ref15 |ref15=
+
+trans15 |trans15=
+
+kan15 |kan15=シャイニング・バーンスラッシュ
+
+rom15 |rom15=Shainingu Bān Surasshu
+
+d15 |d15=
+
+desc15 |desc15=A joint attack between Agnimon and Wolfmon. The opponent is surrounded by a flame dragon, and is sliced by holy light.
+
+
+namel |namel=Crossfire
+
+refl |refl=
+
+transl |transl=
+
+kanl |kanl=クロスファイアー
+
+roml |roml=Kurosufaiā
+
+dl |dl=
+
+descl |descl=A joint attack between Agnimon and Shutumon. Agnimon charges into a tornado created by Shutumon, and attacks with a burning fist.
+
+
+62 w =====================
+1 |Salamander (legendary creature)
+2 |Salamander
+63 DD =====================
+1 |a
+64 -- =====================
+65 DD =====================
+1 |a
+66 -- =====================
+67 DD =====================
+1 |a
+68 rfc =====================
+1 |Da
+2 |557
+69 -- =====================
+70 -- =====================
+71 MultiDesc
+ =====================
+n |n=2
+
+d1 |d1=A powerful two-step punch.
+
+d2 |d2=Spins upward as a tornado of fire.
+72 -- =====================
+73 -- =====================
+74 AT =====================
+1 |Crimson Knuckle
+75 -- =====================
+76 -- =====================
+77 -- =====================
+78 -- =====================
+79 -- =====================
+80 -- =====================
+81 -- =====================
+82 -- =====================
+83 AT =====================
+1 |Gatling Burst
+84 -- =====================
+85 -- =====================
+86 -- =====================
+87 -- =====================
+88 AT =====================
+1 |Crimson Knuckle
+89 -- =====================
+90 -- =====================
+91 -- =====================
+92 rfc =====================
+1 |Bo
+2 |120t
+93 -- =====================
+94 -- =====================
+95 rfc =====================
+1 |St
+2 |752
+96 -- =====================
+97 -- =====================
+98 rfc =====================
+1 |Da
+2 |557
+99 ref =====================
+1 |Digimon ReArise
+100 ref =====================
+1 |Digital Monster: D-Project
+101 ref =====================
+1 |Digimon Story: Super Xros Wars
+102 rfc =====================
+1 |Da
+2 |557
+103 rfc =====================
+1 |Da
+2 |557
+104 ref =====================
+1 |Digimon Pendulum Z
+105 rfc =====================
+1 |St
+2 |701
+106 rfc =====================
+1 |Da
+2 |557
+107 rfc =====================
+1 |Bo
+2 |655
+108 rfc =====================
+1 |Bo
+2 |13L
+109 rfc =====================
+1 |Bo
+2 |91t
+110 rfc =====================
+1 |St
+2 |614
+111 rfc =====================
+1 |BT17
+2 |011 (DCG)
+112 rfc =====================
+1 |BT18
+2 |011 (DCG)
+113 ref =====================
+1 |Digimon Story: Super Xros Wars
+114 rfc =====================
+1 |St
+2 |762
+115 rfc =====================
+1 |St
+2 |886
+116 ref =====================
+1 |Digimon Crusader
+117 ref =====================
+1 |Digimon New Century
+118 rfc =====================
+1 |Bo
+2 |1208
+119 rfc =====================
+1 |Bo
+2 |1208
+120 rfc =====================
+1 |Bo
+2 |1208
+121 ref =====================
+1 |Digital Monster: D-Project
+122 rfc =====================
+1 |Da
+2 |557
+123 rfc =====================
+1 |Da
+2 |557
+124 rfc =====================
+1 |BT12
+2 |012 (DCG)
+125 rfe =====================
+1 |DF
+2 |01
+3 |The Legendary Warrior! Agnimon of Flame
+4 |b
+126 rfc =====================
+1 |BT12
+2 |012 (DCG)
+127 Note =====================
+1 |BT18-088 (DCG) Kanbara Takuya & Minamoto Kouji's name is also treated as "Kanbara Takuya" and "Minamoto Kouji" at the same time.
+n |n=TakuKou
+128 rfc =====================
+1 |BT12
+2 |012 (DCG)
+129 Note =====================
+1 |BT18-088 (DCG) Kanbara Takuya & Minamoto Kouji's name is also treated as "Kanbara Takuya" and "Minamoto Kouji" at the same time.
+n |n=TakuKou
+130 rfc =====================
+1 |St
+2 |886
+131 ref =====================
+1 |Digimon Pendulum Z
+132 rfc =====================
+1 |BT12
+2 |012 (DCG)
+133 rfe =====================
+1 |DF
+2 |12
+3 |Roar Vritramon! Defeat Gigasmon!
+4 |b
+134 ref =====================
+1 |Digimon Pendulum Z
+135 rfc =====================
+1 |P
+2 |029 (DCG)
+136 ref =====================
+1 |Digimon Story: Super Xros Wars
+137 rfc =====================
+1 |BT17
+2 |017 (DCG)
+138 ref =====================
+1 |Digimon Xros Wars: "Xros Songs!! To All The Teens Who Are Chasing After Their Dreams!!"
+139 rfc =====================
+1 |Bo
+2 |129t
+140 rfc =====================
+1 |Bo
+2 |800
+141 rfc =====================
+1 |St
+2 |760
+142 rfc =====================
+1 |St
+2 |891
+143 rfc =====================
+1 |St
+2 |891
+144 ref =====================
+1 |Digimon Story: Super Xros Wars
+145 ref =====================
+1 |Digimon Pendulum Z
+146 ref =====================
+1 |Digimon Pendulum Z
+147 rfc =====================
+1 |Bo
+2 |708
+148 ref =====================
+1 |Digimon Pendulum Z
+149 rfc =====================
+1 |Bo
+2 |1210
+150 rfc =====================
+1 |Bo
+2 |1211
+151 rfc =====================
+1 |St
+2 |767
+152 ref =====================
+1 |Digimon Story: Super Xros Wars
+153 ref =====================
+1 |Digimon Pendulum Z
+154 ref =====================
+1 |Digimon Pendulum Z
+155 rfc =====================
+1 |Bo
+2 |97t
+156 rfc =====================
+1 |BT12
+2 |013 (DCG)
+157 ref =====================
+1 |Digimon New Century
+158 rfe =====================
+1 |DF
+2 |11
+3 |Defeat Me! Legendary Warrior Vritramon Runs Wild
+4 |b
+159 rfe =====================
+1 |DF
+2 |12
+3 |Roar Vritramon! Defeat Gigasmon!
+4 |b
+160 rfc =====================
+1 |Bo
+2 |97t
+161 rfc =====================
+1 |Bo
+2 |1209
+162 ref =====================
+1 |Digimon Pendulum Z
+163 hdr =====================
+1 |Digimon Frontier
+164 epchpt =====================
+1 |DF
+2 |01
+3 |"The Legendary Warrior! Agnimon of Flame"
+165 epchpt =====================
+1 |DF
+2 |50
+3 |"Go Beyond Time! The Beginning of a New Legend"
+166 hdr =====================
+1 |Digimon Frontier: Revival of the Ancient Digimon!!
+167 hdr =====================
+1 |Digimon Xros Wars
+168 epchpt =====================
+1 |XW
+2 |01
+3 |"Taiki, Go to Another World!"
+169 hdr =====================
+1 |Digimon Xros Wars: The Young Hunters Who Leapt Through Time
+170 epchpt =====================
+1 |XW
+2 |79
+3 |"Burn Up, Tagiru! The Glorious Digimon Hunt"
+171 AppearanceList =====================
+1 |
+====Digimon Frontier==== 
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+
+====Digimon Xros Wars==== 
+*
+*
+
+====Other==== 
+*Digimon Frontier: Revival of the Ancient Digimon!!
+
+172 epchpt =====================
+1 |DF
+2 |01
+3 |The Legendary Warrior! Agnimon of Flame
+4 |(Debut)
+173 epchpt =====================
+1 |DF
+2 |02
+3 |Wolfmon of Light, The Underground Labyrinth Battle!
+174 epchpt =====================
+1 |DF
+2 |03
+3 |Don't Allow Bullying! Evolution of Chackmon of Ice
+175 epchpt =====================
+1 |DF
+2 |05
+3 |Thunder Power Shaking the Ground, Blitzmon!
+176 epchpt =====================
+1 |DF
+2 |06
+3 |The Five Legendary Warriors VS The New Warrior!
+177 epchpt =====================
+1 |DF
+2 |07
+3 |Town Floating in the Sky! Toy Agumon Toy Country
+178 epchpt =====================
+1 |DF
+2 |09
+3 |Chackmon's the Enemy!? The Mysterious Forest of Televisions
+179 epchpt =====================
+1 |DF
+2 |10
+3 |Uncontrollable Beast Spirit! Garmmon's Evolution
+180 epchpt =====================
+1 |DF
+2 |11
+3 |Defeat Me! Legendary Warrior Vritramon Runs Wild
+181 epchpt =====================
+1 |DF
+2 |12
+3 |Roar Vritramon! Defeat Gigasmon!
+182 epchpt =====================
+1 |DF
+2 |13
+3 |Awaken Seraphimon! The Secret of The Ten Legendary Warriors
+183 epchpt =====================
+1 |DF
+2 |14
+3 |Thunder! Even Rock Breaks! Bolgmon's Do-or-Die Challenge
+184 epchpt =====================
+1 |DF
+2 |17
+3 |Blizzarmon, Blow the Snow, Call the Glaciers!
+185 epchpt =====================
+1 |DF
+2 |18
+3 |Choo-Choo! The Great Trailmon Race
+186 epchpt =====================
+1 |DF
+2 |21
+3 |The Five Warriors Annihilated!? Terrifying Dark Power!
+187 epchpt =====================
+1 |DF
+2 |22
+3 |To My Home! Takuya's Lonely Return
+188 epchpt =====================
+1 |DF
+2 |23
+3 |Feel the Power of Digimon! Takuya's Full-Body Strategy
+189 epchpt =====================
+1 |DF
+2 |24
+3 |Confrontation, Volcamon! Junpei's Battle with his Past
+190 epchpt =====================
+1 |DF
+2 |26
+3 |Ranamon's Tenacity! Female Digimon Personal Combat
+191 epchpt =====================
+1 |DF
+2 |27
+3 |Double Spirit Miracle! Beowolfmon is Born
+192 epchpt =====================
+1 |DF
+2 |28
+3 |Takuya's Fusion Evolution, Aldamon's Explosive Attack!
+193 epchpt =====================
+1 |DF
+2 |29
+3 |Escape! The Phantasmagoric Sephirothmon
+194 epchpt =====================
+1 |DF
+2 |32
+3 |The Past is Revealed! Duskmon's Secret
+195 epchpt =====================
+1 |DF
+2 |34
+3 |Decisive Battle!! Rose Morning Star, Ofanimon's Rescue Plan
+196 epchpt =====================
+1 |DF
+2 |35
+3 |Spirits Become One! Takuya and Kouji's Ultimate Evolution!
+197 epchpt =====================
+1 |DF
+2 |36
+3 |Fly Towards Victory! Confrontation at Cherubimon's Castle
+198 epchpt =====================
+1 |DF
+2 |38
+3 |Endless Death Match! The Prelude of Lucemon's Revival
+199 epchpt =====================
+1 |DF
+2 |39
+3 |This is the Digital World?! Escape from the Moon
+200 epchpt =====================
+1 |DF
+2 |40
+3 |The Chosen Ones!? The Children who Manipulate Angemon!
+201 epchpt =====================
+1 |DF
+2 |42
+3 |Protect the DigiTama! The Miracle of Disappearing Life
+202 epchpt =====================
+1 |DF
+2 |44
+3 |Fight Together! Gotsumon and Kouji's Vow
+203 epchpt =====================
+1 |DF
+2 |47
+3 |The Royal Knights Fall, And...!!
+204 epchpt =====================
+1 |DF
+2 |50
+3 |Go Beyond Time! The Beginning of a New Legend
+205 epchpt =====================
+1 |XW
+2 |01
+3 |Taiki, Go to Another World!
+4 |(Silhouette)
+206 epchpt =====================
+1 |XW
+2 |79
+3 |Burn Up, Tagiru! The Glorious Digimon Hunt!
+4 |
+207 hdr =====================
+1 |Digimon Adventure V-Tamer 01
+208 hdr =====================
+1 |Digimon Legendary Skies
+209 hdr =====================
+1 |Digimon Xros Wars (Manga)
+2 |Digimon Xros Wars
+210 hdr =====================
+1 |Digimon Universe Appli Monsters (Manga)
+2 |Digimon Universe Appli Monsters
+211 hdr =====================
+1 |Digimon Frontier 15th Blu-ray BOX Special Drama CD
+2 |Digimon Frontier 15th Blu-ray BOX Special Drama CD ~A Train Named Hope~
+212 hdr =====================
+1 |Digimon Frontier: Another Mysterious Message! Who’s the Culprit?
+213 hdr =====================
+1 |Digimon World 3
+214 hdr =====================
+1 |Digital Monster: D-Project
+215 hdr =====================
+1 |Digimon Frontier: Battle Spirit
+216 hdr =====================
+1 |Digimon Racing
+217 hdr =====================
+1 |Digimon Battle Chronicle
+218 hdr =====================
+1 |Digimon Masters
+219 hdr =====================
+1 |Digimon Life
+220 hdr =====================
+1 |Digimon X Arena Console
+2 |Digimon Xros Arena
+221 hdr =====================
+1 |Digimon Story: Super Xros Wars Blue
+222 hdr =====================
+1 |Digimon Story: Super Xros Wars Red
+2 |Red
+223 hdr =====================
+1 |Digimon Collectors
+224 hdr =====================
+1 |Digimon Crusader
+225 hdr =====================
+1 |Digimon Adventure (Game)
+2 |Digimon Adventure
+226 hdr =====================
+1 |Digimon World Re:Digitize Decode
+227 hdr =====================
+1 |Digimon Fortune
+228 hdr =====================
+1 |Digimon Story: Cyber Sleuth
+229 hdr =====================
+1 |Digimon World -next 0rder-‎‎
+230 hdr =====================
+1 |Digimon World -next 0rder- International Edition
+231 hdr =====================
+1 |Digimon Story: Cyber Sleuth Hacker's Memory
+232 hdr =====================
+1 |Digimon ReArise‎‎
+233 hdr =====================
+1 |Digimon RPG
+234 hdr =====================
+1 |Digimon New Century
+235 hdr =====================
+1 |D-Scanner 1.0
+236 hdr =====================
+1 |D-Scanner 3.0
+237 hdr =====================
+1 |D-Tector Toy
+238 hdr =====================
+1 |D-Spirit
+239 hdr =====================
+1 |Digimon Xros Loader Toy
+2 |Digimon Xros Loader
+240 hdr =====================
+1 |Digimon Fusion Loader Toy
+2 |Digimon Fusion Loader
+241 hdr =====================
+1 |Digimon Pendulum Z
+242 hdr =====================
+1 |Vital Bracelet Digital Monster
+243 NeoTCG
+ =====================
+s1 |s1=HC
+
+s2 |s2=AE
+
+s3 |s3=DJ
+
+s4 |s4=DCG
+
+244 IGTabs2
+ =====================
+1 |1=bandai
+
+t1 |t1=
+
+
+2 |2=toei
+
+t2 |t2=
+
+
+3 |3=game
+
+t3 |t3=
+
+
+
+4 |4=mobage
+
+t4 |t4=
+
+
+5 |5=misc
+
+t5 |t5=
+
+
+
+
+245 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Agnimon3.jpg200px
+
+c1 |c1=Digimon Reference Book
+
+i2 |i2=Agnimon.jpg200x200px
+
+c2 |c2=Digimon Frontier: Battle Spirit
+
+i3 |i3=Agnimon2.jpg200x200px
+
+c3 |c3=Digital Monster Card Game Alpha
+
+i4 |i4=Agnimon5.jpg200x200px
+
+c4 |c4=Digimon Jintrix
+
+i7 |i7=Agnimon4.jpg200px
+
+c7 |c7=Digimon Jintrix
+
+i8 |i8=Agnimon collectors.png200x200px
+
+c8 |c8=Digimon Collectors
+
+i9 |i9=Agnimon new century.png200x200px
+
+c9 |c9=Digimon New Century
+
+246 ! =====================
+247 ! =====================
+248 ! =====================
+249 ! =====================
+250 ! =====================
+251 ! =====================
+252 ! =====================
+253 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Agnimon.png200x200px
+
+c1 |c1=Digimon Frontier
+
+i2 |i2=Agnimon back.jpg200x200px
+
+c2 |c2=Digimon Frontier(Lineart)
+
+i3 |i3=Agnimon head1.jpg200x200px
+
+c3 |c3=Digimon Frontier(Lineart)
+
+i4 |i4=Agnimon head2.jpg200x200px
+
+c4 |c4=Digimon Frontier(Lineart)
+
+i7 |i7=Agnimon lineart.png200x200px
+
+c7 |c7=Digimon Frontier(Lineart)
+
+i8 |i8=Agnimon lineart2.png200x200px
+
+c8 |c8=Digimon Frontier(Lineart)
+
+i9 |i9=Agnimon lineart3.png200x200px
+
+c9 |c9=Digimon Frontier(Lineart)
+
+i10 |i10=Agnimon model sheet.jpg200x200px
+
+c10 |c10=Digimon Frontier(Model sheet)
+
+i13 |i13=Agnimon Wolfmon dvd.png200x200px
+
+c13 |c13=Digimon Frontier
+
+i14 |i14=Agnimon 20thshop.jpg200x200px
+
+c14 |c14=Digimon 20th Anniversary Project
+
+i15 |i15=Kanbara takuya agnimon 20thshop.jpg200x200px
+
+c15 |c15=Digimon 20th Anniversary Project(with Kanbara Takuya)
+
+254 ! =====================
+255 ! =====================
+256 ! =====================
+257 ! =====================
+258 ! =====================
+259 ! =====================
+260 ! =====================
+261 ! =====================
+262 ! =====================
+263 ! =====================
+264 ! =====================
+265 IG
+ =====================
+w |w=128
+
+h |h=128
+
+i1 |i1=Agnimon dproject.png
+
+c1 |c1=Digital Monster: D-Project
+
+i2 |i2=Agnimon dfbs.png
+
+c2 |c2=Digimon Frontier: Battle Spirit
+
+i3 |i3=Agnimon char selection dfbs.png
+
+c3 |c3=Digimon Frontier: Battle Spirit(character selection)
+
+i4 |i4=Agnimon intro dfbs.png
+
+c4 |c4=Digimon Frontier: Battle Spirit(match intro)
+
+i5 |i5=Agnimon racing dr.png
+
+c5 |c5=Digimon Racing(portrait)
+
+i6 |i6=Agnimon battle dssxw.png
+
+c6 |c6=Digimon Story: Super Xros Wars Red & Blue(battle)
+
+i7 |i7=Agnimon map dssxw.png
+
+c7 |c7=Digimon Story: Super Xros Wars Red & Blue(map)
+
+i8 |i8=Agnimon dot.png
+
+c8 |c8=Digimon ReArise(dot)
+
+266 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Agnimon DRA2.JPG200x200px
+
+c1 |c1=Digimon Battle Chronicle
+
+i2 |i2=Agnimon DMO.png200x200px
+
+c2 |c2=Digimon Masters
+
+i3 |i3=Agnimon digimon adventure psp.png200x200px
+
+c3 |c3=Digimon Adventure
+
+i4 |i4=Agnimon next0rder.jpg200px
+
+c4 |c4=Digimon World -next 0rder-
+
+i7 |i7=Agnimon_Model_Cyber.png200px
+
+c7 |c7=Digimon Story: Cyber Sleuth Hacker's Memory
+
+i8 |i8=Agnimon ReArise.png200x200px
+
+c8 |c8=Digimon ReArise
+
+267 ! =====================
+268 ! =====================
+269 ! =====================
+270 ! =====================
+271 ! =====================
+272 ! =====================
+273 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Agnimon Collectors Hybrid Card.jpg200x200px
+
+c1 |c1=Digimon Collectors(Card)
+
+i2 |i2=Agnimon Championship Collectors Hybrid Card.jpg200x200px
+
+c2 |c2=Digimon Collectors(Championship Card)
+
+i3 |i3=Agnimon Championship Collectors Hybrid Card2.jpg200x200px
+
+c3 |c3=Digimon Collectors(Championship Card)
+
+i4 |i4=Agnimon ex collectors.jpg200x200px
+
+c4 |c4=Digimon Collectors(EX Card)
+
+i7 |i7=Agnimon re collectors card.png200x200px
+
+c7 |c7=Digimon Collectors(RE Card)
+
+i8 |i8=Agnimon re collectors card2.png200x200px
+
+c8 |c8=Digimon Collectors(RE Card)
+
+i9 |i9=Agnimon and Wolfmon re collectors card.png200x200px
+
+c9 |c9=Digimon Collectors(RE Card with Wolfmon)
+
+i10 |i10=Dch-7-381 front.png200x200px
+
+c10 |c10=Digimon Crusader(Card)
+
+i13 |i13=Dch-7-382 front.png200x200px
+
+c13 |c13=Digimon Crusader(Card)
+
+i14 |i14=Dch-7-475 front.png200x200px
+
+c14 |c14=Digimon Crusader(Card)
+
+i15 |i15=Dch-7-534 front.png200x200px
+
+c15 |c15=Digimon Crusader(Card)
+
+274 ! =====================
+275 ! =====================
+276 ! =====================
+277 ! =====================
+278 ! =====================
+279 ! =====================
+280 ! =====================
+281 ! =====================
+282 ! =====================
+283 ! =====================
+284 ! =====================
+285 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Agnimon early.png200x200px
+
+c1 |c1=Early design illustration for the  Digimon Web Official Twitter
+
+i2 |i2=Agnimon early2.png200x200px
+
+c2 |c2=Early design illustration for the  Digimon Web Official Twitter
+
+i3 |i3=Agnimon early3.png200x200px
+
+c3 |c3=Early design illustration for the  Digimon Web Official Twitter
+
+i4 |i4=Agnimon velgrmon early.png200x200px
+
+c4 |c4=Early design illustration for the  Digimon Web Official Twitter
+
+i7 |i7=Digimon frontier promo art.jpg200x200px
+
+c7 |c7=Digimon Frontier(Promotional Artwork)
+
+i8 |i8=Agnimon battle spirit card.jpg200x200px
+
+c8 |c8=Digimon Frontier: Battle Spirit(Promo Card)
+
+i9 |i9=Agnimon vritramon trading collection.jpg200x200px
+
+c9 |c9=Digimon Frontier Trading Collection Light
+
+i10 |i10=Digimon frontier 20th key art2.png200x200px
+
+c10 |c10=Digimon Frontier 20th Key Art Cloth Poster
+
+
+i13 |i13=Digimon frontier bluray 15th promo art.jpg200x200px
+
+c13 |c13=Illustration for the Digimon Frontier 15th Anniversary BD-Box Collection by Nakatsuru Katsuyoshi
+
+i14 |i14=Premiumselectfile2 promo art.png200x200px
+
+c14 |c14=Premium Select File Vol.2(Digital Monster Card Game)
+
+i15 |i15=Digimon_20th_anniversary_poster.jpg200x200px
+
+c15 |c15=Illustration for the Digimon 20th Anniversary Project
+
+i16 |i16=Digimon_25th_anniversary_poster.jpg200x200px
+
+c16 |c16=Illustration for the Digimon 25th Anniversary Project
+
+i19 |i19=Digimon 25th anniversary sd art.jpg200x200px
+
+c19 |c19=Illustration for the Digimon 25th Anniversary Project
+
+i20 |i20=Fortune poster.jpg200x200px
+
+c20 |c20=Digimon Fortune(Promotional Artwork)
+
+i21 |i21=Five Warriors of Justice opening.png200x200px
+
+c21 |c21=Five Warriors of Justice(Opening)
+
+i22 |i22=St-757.jpg200x200px
+
+c22 |c22=Five Warriors of Justice(Card)
+
+286 ! =====================
+287 ! =====================
+288 ! =====================
+289 ! =====================
+290 ! =====================
+291 ! =====================
+292 ! =====================
+293 ! =====================
+294 ! =====================
+295 ! =====================
+296 ! =====================
+297 ! =====================
+298 ! =====================
+299 ! =====================
+300 ! =====================
+301 ! =====================
+302 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Digimon 20th commemorative can badge spirits frontier.jpg200x200px
+
+c1 |c1=Digimon 20th Anniversary: Commemorative Can Badge
+
+i2 |i2=Ancientgreymon digimonweb.png200x200px
+
+c2 |c2=Illustration for the Digimon Web Official Twitter
+
+i3 |i3=Agnimon wolfmon digimonweb.jpg200x200px
+
+c3 |c3=Illustration for the Digimon Web Official Twitter
+
+i4 |i4=Digimon Memorial 2019 1 digimonweb.jpg200x200px
+
+c4 |c4=Illustration for the Digimon Web Official Twitter
+
+i7 |i7=Digimon Memorial 2019 2 digimonweb.jpg200x200px
+
+c7 |c7=Illustration for the Digimon Web Official Twitter
+
+i8 |i8=Koshien digimonweb.png200x200px
+
+c8 |c8=Illustration for the Digimon Web Official Twitter
+
+i9 |i9=2022happynewyear digimonweb.jpg200x200px
+
+c9 |c9=Illustration for the Digimon Web Official Twitter
+
+i10 |i10=Digifes_2022_digimonweb.jpg200x200px
+
+c10 |c10=Illustration for the Digimon Web Official Twitter
+
+i13 |i13=Digimon battle chronicle digimonweb.jpg200x200px
+
+c13 |c13=Illustration for the Digimon Web Official Twitter
+
+i14 |i14=Digimon card premium edition carddass set promo art.jpg200x200px
+
+c14 |c14=Digimon Card Premium Edition(Digital Monster Card Game)
+
+i15 |i15=Agnimon 2021 wafersticker.jpg200x200px
+
+c15 |c15=Digimon Adventure:Wafer Sticker
+
+i16 |i16=DCG Booster Great Legend Promo.png200x200px
+
+c16 |c16=Digimon Card Game(Great Legend Booster Promo)
+
+i19 |i19=Agnimon digimon profile.png200x200px
+
+c19 |c19=Illustration for the Digimon Profile
+
+i20 |i20=Agumon V-mon Guilmon Agnimon Shoutmon Deck Sleeve.jpg200x200px 
+
+c20 |c20=Digimon Card Game(Official Deck Sleeve)
+
+i21 |i21=Susanoomon Deck Sleeve.jpg200x200px 
+
+c21 |c21=Digimon Card Game(Official Deck Sleeve)
+
+i22 |i22=PB-12 Playmat.jpg200x200px 
+
+c22 |c22=Digimon Card Game(Official Playmat)
+
+303 ! =====================
+304 ! =====================
+305 ! =====================
+306 ! =====================
+307 ! =====================
+308 ! =====================
+309 ! =====================
+310 ! =====================
+311 ! =====================
+312 ! =====================
+313 ! =====================
+314 ! =====================
+315 ! =====================
+316 ! =====================
+317 ! =====================
+318 ! =====================
+319 IG
+ =====================
+bg |bg=white
+
+w |w=200
+
+h |h=200
+
+i1 |i1=Digimon museum illustration gossan.jpg200x200px
+
+c1 |c1=Illustration for the Digital Monster 25th Anniversary Exhibition ~Digimon Museum~ by GOSSAN
+
+i2 |i2=Takuya agnimon digifes 2022 bromide print.jpg200x200px
+
+c2 |c2=DigiFes 2022(Bonus Bromide Print)
+
+i3 |i3=Digimon Frontier exhibition 25th concept art.jpg200x200px
+
+c3 |c3=Concept art for the Anime 25th Anniversary “Digimon Adventure Exhibition” by Watanabe Kenji
+
+i4 |i4=Frontier otedama plush2.jpg200x200px
+
+c4 |c4=Digimon Frontier Promotional Otedama Plush Toy displayed at DigiFes 2022
+
+i7 |i7=Agnimon_otedama_plush.jpg200x200px
+
+c7 |c7=Digimon FrontierOtedama Plush
+
+i8 |i8=Agnimon_otedama_plush 2.jpg200x200px
+
+c8 |c8=Digimon FrontierOtedama Plush
+
+i9 |i9=Agnimon_otedama_plush 3.jpg200x200px
+
+c9 |c9=Digimon FrontierOtedama Plush
+
+i10 |i10=Agnimon_otedama_plush 4.jpg200x200px
+
+c10 |c10=Digimon FrontierOtedama Plush
+
+320 ! =====================
+321 ! =====================
+322 ! =====================
+323 ! =====================
+324 ! =====================
+325 ! =====================
+326 ! =====================
+327 ! =====================
+328 IG
+ =====================
+bg |bg=white
+
+w |w=80
+
+h |h=80
+
+i1 |i1=Agnimon vpet dscan.gif
+
+c1 |c1=D-Scanner
+
+i2 |i2=Agnimon vpet spirit.gif
+
+c2 |c2=D-Tector & D-Spirit
+
+i3 |i3=Agnimon vpet xloader.png80x80px
+
+c3 |c3=Digimon Xros Loader
+
+i4 |i4=Agnimon vpet penz.gif
+
+c4 |c4=Digimon Pendulum Z
+
+i5 |i5=Agnimon vpet vb.png80x80px
+
+c5 |c5=Vital Bracelet Digital Monster
+
+329 ! =====================
+330 ! =====================
+331 R
+ =====================
+1 |
+
+331

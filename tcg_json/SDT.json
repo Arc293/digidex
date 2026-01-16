@@ -1,0 +1,51 @@
+{
+    "general": [
+        {
+            "names": "{{{name"
+        },
+        {
+            "levels": "Level\\n"
+        },
+        {
+            "groups": "Guard points\\n"
+        },
+        {
+            "artists": "Illustrator\\n"
+        },
+        {
+            "types": "Type - blank (default), f= Flight Type, g= Ground Type\\n"
+        }
+    ],
+    "card_info": {
+        "previous_card_number": "previous\\n",
+        "next_card_number": "Next number\\n",
+        "card_number": "Card series name\\n",
+        "extra_info": "Extra\\n",
+        "japanese_extra_info": "Extra (Japanese)\\n",
+        "notes": "Notes\\n"
+    },
+    "stats": {
+        "hp": "HP\\n",
+        "rock_paper_scissors": "Rock-Paper-Scissors attribute - r= Rock, s= Scissors, p= Paper\\n"
+    },
+    "attacks": [
+        {
+            "name": "DigiBlast (Special Move)\\n"
+        },
+        {
+            "name": "DigiStorm (Special Move)\\n",
+            "power": "DigiStorm points\\n"
+        },
+        {
+            "name": "Attack points\\n"
+        }
+    ],
+    "special_abilities": [
+        {
+            "attribute": "Digisoul\\n",
+            "name": "D-Skill (Special Ability)\\n",
+            "description": "D-Skill description\\n",
+            "japanese_description": "D-Skill description (Japanese)\\n"
+        }
+    ]
+}

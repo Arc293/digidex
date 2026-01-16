@@ -1,17 +1,18 @@
-import json
+from bs4 import BeautifulSoup
 
-digimon_list = {}
+def replace_ref_tag_with_template(content:str)->str:
+    soup = BeautifulSoup(content, 'lxml')
+    for ref in soup.find_all('ref'):
+        ref_text = []
+        
+        if ref.string and ref.string.startswith('[['):
+            ref_text.append(ref.string)
+        elif ref.has_attr('name'):
+            val = ref['name']
+            if val.endswith('/'):
+                val = val[0:-1]
+            ref_text.append(val)
+        ref.replace_with("{{ref|"+"|".join(ref_text)+"}}")
+    print(soup.text)
 
-try:
-    with open('digi_list_3.json') as infile:
-        digimon_list = json.load(infile)
-except Exception:
-    print("Exception in user code:")
-for digi in digimon_list:
-    digimon_list[digi]['debut']=' '.join(digimon_list[digi]['debut'])
-    if digimon_list[digi]['debut'].endswith(']'):
-        i=digimon_list[digi]['debut'].rfind('[')
-        digimon_list[digi]['debut']=digimon_list[digi]['debut'][0:i].strip()
-
-with open('digi_list_3.json', 'w') as outfile:
-    json.dump(digimon_list, outfile)
+replace_ref_tag_with_template("<div> [[Beelzebumon (X-Antibody)]] (with [[Barbamon]], [[Belphemon: Rage Mode]], [[Demon]], [[Leviamon]], [[Lilithmon]], or [[Lucemon: Falldown Mode]]<ref name=DM02-104/>)</div>")

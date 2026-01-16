@@ -1,0 +1,22 @@
+{
+    "general": {
+        "series": "\\n"
+    },
+    "card_info": {
+        "card_number": "\\n",
+        "previous_card_number": "\\n",
+        "next_card_number": "\\n"
+    },
+    "stats": {
+        "appearance_cost": "\\n",
+        "evolution_cost": "\\n"
+    },
+    "attacks": [
+        {
+            "name": "\\n"
+        },
+        {
+            "name": "\\n"
+        }
+    ]
+}

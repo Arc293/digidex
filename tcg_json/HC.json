@@ -1,0 +1,105 @@
+{
+    "general": [
+        {
+            "groups": "Gold Frame"
+        },
+        {
+            "families": "Field 4\\n"
+        },
+        {
+            "levels": "Level Equivalent (No Level)\\n"
+        },
+        {
+            "attributes": "Attribute 2\\n"
+        },
+        {
+            "types": "Type 2\\n"
+        },
+        {
+            "artists": "Illustrator name\\n"
+        }
+    ],
+    "card_info": {
+        "card_number": "Series name (e.g. St, Bo, etc)\\n",
+        "requirement_quote": "Requirements: e=Evolution, f=Fusion, a=Appearance\\n",
+        "previous_card_number": "Previous card number\\n",
+        "next_card_number": "Next card number\\n",
+        "frame_color": "Frame: b=Blue Frame, r=Red Frame, g=Gold Frame, s=Silver Frame\\n",
+        "year_of_release": "Year of manufacture\\n",
+        "notes": "Additional notes\\n"
+    },
+    "stats": {
+        "lost_points": "Lost Point\\n"
+    },
+    "attacks": [
+        {
+            "name": "Blue Frame",
+            "type": "Battle Type 2\\n",
+            "power": "Attack B points\\n"
+        },
+        {
+            "name": "Attack A\\n",
+            "power": "Attack A points\\n"
+        },
+        {
+            "name": "Attack C \\n",
+            "power": "Attack C points\\n"
+        }
+    ],
+    "evolution_info": [
+        {
+            "to": "Digimon 1\\n",
+            "from": "Digimon 1a\\n",
+            "from_2": "Digimon 1b\\n",
+            "option": "Os/Xs/Item/Program 1\\n",
+            "requirements": "Evolution/Appearance/Fusion Requirement description 1 (e.g. Unless this Digimon is replaced with another Level III Digimon..., etc)\\n",
+            "japanese_requirements": "Evolution/Appearance/Fusion Requirement description 1 (Japanese)\\n"
+        },
+        {
+            "to": "Digimon 2\\n",
+            "from": "Digimon 2a\\n",
+            "from_2": "Digimon 2b\\n",
+            "option": "Os/Xs/Item/Program 2\\n",
+            "requirements": "Evolution/Appearance/Fusion Requirement description 2 \\n",
+            "japanese_requirements": "Evolution/Appearance/Fusion Requirement description 2 (Japanese)\\n"
+        },
+        {
+            "to": "Digimon 3\\n",
+            "from": "Digimon 3a\\n",
+            "from_2": "Digimon 3b\\n",
+            "option": "Os/Xs/Item/Program 3\\n",
+            "requirements": "Evolution/Appearance/Fusion Requirement description 3 \\n",
+            "japanese_requirements": "Evolution/Appearance/Fusion Requirement description 3 (Japanese)\\n"
+        },
+        {
+            "to": "Digimon 4\\n",
+            "from": "Digimon 4a\\n",
+            "from_2": "Digimon 4b\\n",
+            "option": "Os/Xs/Item/Program 4\\n",
+            "requirements": "Evolution/Appearance/Fusion Requirement description 4 \\n",
+            "japanese_requirements": "Evolution/Appearance/Fusion Requirement description 4 (Japanese)\\n"
+        },
+        {
+            "to": "Digimon 5\\n",
+            "from": "Digimon 5a\\n",
+            "from_2": "Digimon 5b\\n",
+            "option": "Os/Xs/Item/Program 5\\n",
+            "requirements": "Evolution/Appearance/Fusion Requirement description 5 \\n",
+            "japanese_requirements": "Evolution/Appearance/Fusion Requirement description 5 (Japanese)\\n"
+        }
+    ],
+    "special_abilities": [
+        {
+            "effect": "Special Ability 1 \\n",
+            "japanese_effect": "Special Ability 1 (Japanese) \\n"
+        },
+        {
+            "effect": "Special Ability 2\\n",
+            "japanese_effect": "Special Ability 2 (Japanese) \\n"
+        },
+        {
+            "effect": "Special Ability 3\\n",
+            "japanese_effect": "Special Ability 3 (Japanese) \\n"
+        }
+    ]
+}

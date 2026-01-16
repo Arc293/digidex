@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "evolve_from": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "is_special_evo": {
+              "type": "boolean"
+            },
+            "special_evo_type": {
+              "type": "string"
+            },
+            "unknown_param": {
+              "type": "array",
+              "items": {}
+            },
+            "references": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "type": {
+              "type": "string"
+            },
+            "has_fusees": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "is_special_evo",
+            "special_evo_type",
+            "unknown_param",
+            "references",
+            "type",
+            "has_fusees",
+            "name"
+          ]
+        }
+    ]
+    }
+}
+}

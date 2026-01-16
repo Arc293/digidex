@@ -1,0 +1,91 @@
+{
+    "general": [
+        {
+            "groups": "group 3 (e.g. Liberator)\\n"
+        },
+        {
+            "artists": "illustrator\\n"
+        },
+        {
+            "names": "Digimon's pagename\\n"
+        },
+        {
+            "levels": "evolution level of digimon (e.g. Child, Ultimate; if this card is appmon, use grade)\\n"
+        },
+        {
+            "grades": "evolution grade of appmon (e.g. Standard, Super)\\n"
+        },
+        {
+            "attributes": "attribute\\n"
+        },
+        {
+            "types": "type (if this card is appmon, use app)\\n"
+        }
+    ],
+    "card_info": [
+        {
+            "colors": "card colour (r=red, b=blue, y=yellow, g=green, w=white, p=purple, bk=black)\\n"
+        }
+    ],
+    "stats": {
+        "level_stat": "card level\\n",
+        "dp": "DP\\n",
+        "entry_cost": "play cost\\n"
+    },
+    "digixros": {
+        "overflow_effect": "ACE effect\\n",
+        "japanese_overflow_effect": "ACE effect jp text\\n"
+    },
+    "attacks": [
+        {
+            "name": "[[Category:List of Blue Digimon Cards]]"
+        }
+    ],
+    "evolution_info": [
+        {
+            "color": "evolution colour (r=red, b=blue, y=yellow, g=green, w=white, p=purple, bk=black, rb=rainbow)\\n"
+        },
+        {
+            "cost": "evolution cost\\n"
+        },
+        {
+            "level": "evolution level (card to evolve from)\\n"
+        },
+        {
+            "appmon_evolution": "evolution from appmon grade (type yes)\\n"
+        },
+        {
+            "to": "effect 1\\n"
+        },
+        {
+            "to": "effect 2\\n"
+        },
+        {
+            "to": "effect 3\\n"
+        }
+    ],
+    "link_abilities": [
+        {
+            "name": "link base effect 0 (the actual <Link> effect itself)\\n",
+            "japanese_name": "link base effect 0 jp text\\n"
+        },
+        {
+            "effect": "link base effect 1 (the inheritable)\\n"
+        },
+        {
+            "dp": "the DP granted upon linking this card\\n"
+        }
+    ],
+    "inherited_effects": [
+        {
+            "effect": "evolution base effect 1\\n",
+            "japanese_effect": "evolution base effect 1 jp text\\n"
+        },
+        {
+            "effect": "evolution base effect 2\\n"
+        },
+        {
+            "effect": "evolution base effect 3\\n"
+        }
+    ]
+}

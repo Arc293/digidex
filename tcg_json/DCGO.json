@@ -1,0 +1,49 @@
+{
+    "general": [
+        {
+            "groups": "group 3 (e.g. General)\\n"
+        },
+        {
+            "types": "tamer (t) or option card (o)\\n"
+        },
+        {
+            "artists": "2nd illustrator\\n"
+        },
+        {
+            "names": "Card name link\\n"
+        }
+    ],
+    "card_info": [
+        {
+            "image_headers": "image tab header for 2nd card variant\\n"
+        },
+        {
+            "colors": "card colour (r, b, y)\\n"
+        }
+    ],
+    "stats": {
+        "entry_cost": "play (Tamer)/usage (Option) cost\\n"
+    },
+    "attacks": [
+        {
+            "name": "[[Category:List of Blue {{#switch:{{{type"
+        }
+    ],
+    "evolution_info": [
+        {
+            "to": "effect 1\\n"
+        },
+        {
+            "to": "effect 2\\n"
+        },
+        {
+            "to": "effect 3\\n"
+        }
+    ],
+    "security_effects": [
+        {
+            "effect": "security effect 1\\n",
+            "japanese_effect": "security effect 1 jp text\\n"
+        }
+    ]
+}

@@ -1,0 +1,72 @@
+{
+    "card_info": [
+        {
+            "promo_packs": "partner Appmon's pagename\\n"
+        }
+    ],
+    "general": [
+        {
+            "names": "Appmon's pagename\\n"
+        },
+        {
+            "groups": "grade (Standard/Super/Ultimate/God)\\n"
+        },
+        {
+            "levels": "level (for Digimon)\\n"
+        },
+        {
+            "types": "type (Social/Navi/System/Life/Tool/Game/Entertainment). put - for digimon\\n"
+        },
+        {
+            "attributes": "virus, 7code\\n"
+        }
+    ],
+    "stats": {
+        "hp": "\\n",
+        "power": "\\n",
+        "defense": "\\n",
+        "speed": "\\n"
+    },
+    "digixros": {
+        "result": "Appgattai Appmon's name\\n",
+        "gattai_cost": "Appgattai/Applink cost\\n",
+        "partner": "Appgattai partner Appmon's name\\n",
+        "technique_name": "Gattai/Applink App technique\\n",
+        "japanese_technique_name": "Gattai/Applink App technique name (jp)\\n",
+        "technique_type": "Gattai/Applink app tech type (Buff, Debuff, Heal, Attack, Beam)\\n",
+        "cost": "Gattai/Applink app tech cost\\n"
+    },
+    "attacks": [
+        {
+            "name": "normal attack name\\n",
+            "japanese_name": "normal attack name (jp)\\n",
+            "description": "normal attack description\\n",
+            "japanese_description": "normal attack desc (jp)\\n"
+        },
+        {
+            "name": "app technique name\\n",
+            "japanese_name": "app technique name (jp)\\n",
+            "cost": "app technique cost\\n",
+            "type": "app technique type (Buff, Debuff, Heal, Attack, Beam)\\n",
+            "description": "app technique description\\n",
+            "japanese_description": "app tech desc (jp)\\n"
+        },
+        {
+            "name": "Gattai/Applink normal attack\\n",
+            "japanese_name": "Gattai/Applink normal attack (jp)\\n"
+        }
+    ],
+    "abilities": [
+        {
+            "name": "ability\\n",
+            "japanese_name": "ability name (jp)\\n",
+            "description": "ability description\\n",
+            "japanese_description": "ability desc (jp)\\n"
+        }
+    ],
+    "link_abilities": [
+        {
+            "effect": "Applink Digimon's name\\n"
+        }
+    ]
+}
