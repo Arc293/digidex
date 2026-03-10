@@ -1,0 +1,495 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "alt_names": {
+      "type": "object",
+      "properties": {
+        "development_name": {
+          "type": "string"
+        },
+        "digimoji": {
+          "type": "object",
+          "properties": {
+            "DigiAlph": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DigiAlph2": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "DigiAlph",
+            "DigiAlph2"
+          ]
+        },
+        "dub_names": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        },
+        "kanji": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "other_language": {
+          "type": "string"
+        },
+        "other_names": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "romaji": {
+          "type": "string"
+        },
+        "titles": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "development_name",
+        "digimoji",
+        "dub_names",
+        "kanji",
+        "other_language",
+        "other_names",
+        "romaji",
+        "titles"
+      ]
+    },
+    "attack_techniques": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "dub_name": {
+            "type": "string"
+          },
+          "kanji": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "romaji": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "dub_name",
+          "kanji",
+          "name",
+          "romaji",
+          "translation"
+        ]
+      }
+    },
+    "debut": {
+      "type": "object",
+      "properties": {
+        "anime_debut": {
+          "type": "string"
+        },
+        "card_debut": {
+          "type": "string"
+        },
+        "debut_year": {
+          "type": "object",
+          "properties": {
+            "reference": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "reference",
+            "value"
+          ]
+        },
+        "drb_entry_date": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string"
+            },
+            "year": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "date",
+            "year"
+          ]
+        },
+        "game_debut": {
+          "type": "string"
+        },
+        "manga_debut": {
+          "type": "string"
+        },
+        "vpet_debut": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "anime_debut",
+        "card_debut",
+        "debut_year",
+        "drb_entry_date",
+        "game_debut",
+        "manga_debut",
+        "vpet_debut"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "description_japanese": {
+      "type": "string"
+    },
+    "description_source": {
+      "type": "string"
+    },
+    "design_and_analysis": {
+      "type": "string"
+    },
+    "drb_index": {
+      "type": "number"
+    },
+    "etymology": {
+      "type": "string"
+    },
+    "evolve_from": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "conditions": {
+            "type": "string"
+          },
+          "major": {
+            "type": "boolean"
+          },
+          "has_fusees": {
+            "type": "boolean"
+          },
+          "is_special_evo": {
+            "type": "boolean"
+          },
+          "link": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "name_text": {
+            "type": "string"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "special_evo_type": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "unknown_param": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "conditions",
+          "major",
+          "has_fusees",
+          "is_special_evo",
+          "link",
+          "name",
+          "name_text",
+          "references",
+          "special_evo_type",
+          "type",
+          "unknown_param"
+        ]
+      }
+    },
+    "evolve_to": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "conditions": {
+            "type": "string"
+          },
+          "major": {
+            "type": "boolean"
+          },
+          "has_fusees": {
+            "type": "boolean"
+          },
+          "is_special_evo": {
+            "type": "boolean"
+          },
+          "link": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "name_text": {
+            "type": "string"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "special_evo_type": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "unknown_param": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "conditions",
+          "major",
+          "has_fusees",
+          "is_special_evo",
+          "link",
+          "name",
+          "name_text",
+          "references",
+          "special_evo_type",
+          "type",
+          "unknown_param"
+        ]
+      }
+    },
+    "image_gallery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "caption": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "caption",
+          "image"
+        ]
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        },
+        "class_type": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "equipment": {
+          "type": "array",
+          "items": {}
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {}
+        },
+        "levels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        },
+        "weight": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reference",
+              "value"
+            ]
+          }
+        }
+      },
+      "required": [
+        "attributes",
+        "class_type",
+        "equipment",
+        "fields",
+        "groups",
+        "levels",
+        "type",
+        "weight"
+      ]
+    },
+    "subspecies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reference",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "alt_names",
+    "attack_techniques",
+    "debut",
+    "description",
+    "description_japanese",
+    "description_source",
+    "design_and_analysis",
+    "drb_index",
+    "etymology",
+    "evolve_from",
+    "evolve_to",
+    "image_gallery",
+    "images",
+    "name",
+    "stats",
+    "subspecies"
+  ]
+}
