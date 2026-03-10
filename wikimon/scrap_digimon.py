@@ -6,8 +6,9 @@ import sys, traceback
 from datetime import datetime
 from bs4 import BeautifulSoup
 import wikitextparser as wtp
-from collections import Counter
 import unicodedata
+import graphlib
+import scrap_images
 
 wikimon_url = "https://wikimon.net"
 wikimon_api_url = "https://wikimon.net/api.php"
@@ -52,27 +53,6 @@ def load_content_json():
 def get_date(date_string):
     return datetime.fromisoformat(date_string) #09:45, 17 October 2022
 
-def get_digimon_list_for_api_legacy(value_list=None):
-    # Return titles param value for attribute in batches of 50
-    digimon_list = load_json()
-    urlfriendlyname_list = []
-    all_titles = []
-    if value_list == None:
-        for name,body in digimon_list.items():
-            urlfriendlyname_list.append(body["url"].replace(wikimon_url+"/",""))
-            if len(urlfriendlyname_list) == 50:
-                all_titles.append('|'.join(urlfriendlyname_list))
-                urlfriendlyname_list.clear()
-    else:
-        for digimon in value_list:
-            urlfriendlyname_list.append(digimon_list[digimon]["url"].replace(wikimon_url+"/",""))
-            if len(urlfriendlyname_list) == 50:
-                all_titles.append('|'.join(urlfriendlyname_list))
-                urlfriendlyname_list.clear()
-    if len(urlfriendlyname_list)>0:
-        all_titles.append('|'.join(urlfriendlyname_list))
-    return all_titles
-
 def get_digimon_list_for_api(value_list):
     all_titles = []
     chunk_string_arr = []
@@ -114,12 +94,12 @@ def get_digimon_list(session=None):
                 continueparam = f'&cmcontinue={response["continue"]["cmcontinue"]}'
             else:
                 break
-    except Exception:
+    except Exception as e:
         print("Exception in user code:")
         print("-"*60)
         traceback.print_exc(file=sys.stdout)
         print("-"*60)
-        return []
+        raise e 
     return digimon_list
 
 def get_absent_digimon(digi_obj, new_digimon_list):
@@ -133,6 +113,7 @@ def scrap_and_save_page_content():
     # digimon_list = load_json()
     page_object = {}
     digi_obj = {}
+    digimon_to_update = []
     try:
         with open('wikimon_scrap.json') as infile:
             page_object = json.load(infile)
@@ -153,9 +134,10 @@ def scrap_and_save_page_content():
     changed = False
     last_update = None
     try:
-        digimon_to_update = []
         session = requests.Session()
         digimon_list = get_digimon_list(session=session)
+        if not digimon_list:
+            raise Exception('No digimon data fetched. Server issue.')
         absent_digimon = get_absent_digimon(digi_obj, digimon_list)
         if len(absent_digimon)>0:
             changed = True
@@ -221,6 +203,7 @@ def scrap_and_save_page_content():
         if changed:
             with open('wikimon_scrap.json', 'w') as outfile:
                 json.dump(page_object, outfile, sort_keys=True)
+    return digimon_to_update
 
 def resolve_redirects(session, content):
     redirected_digi = []
@@ -258,101 +241,6 @@ def resolve_redirects(session, content):
                 print("Redirected page content updated for: ",original_digi_name)
             i+=1
     return (content,len(redirected_digi)>0)
-
-def main(scrap_description, scrap_stats):
-    newDigi = []
-    try:
-        page = requests.get(wikimon_url+"/List_of_Digimon")
-        soup = BeautifulSoup(page.content, 'html.parser')
-        digimon_tables = soup.find_all('table', class_='wikitable')
-
-        digimon_list = load_json()
-        digimon_row_list = []
-
-        for table in digimon_tables:
-            digimon_row_list.extend(table.find_all('tr'))
-
-        for digimon_row in digimon_row_list:
-            # print(digimon_row)
-            digimon = digimon_row.find_all('td')
-            if len(digimon) == 0:
-                continue
-            name = digimon[0].find('a')['title'].strip()
-            if name not in digimon_list:
-                newDigi.append(name)
-                url = digimon[0].find('a')['href']
-                kanji = digimon[1].text.strip()
-                debut_year = digimon[2].text.strip()
-                debut = digimon[3].text.strip()
-                digimon_list[name] = {}
-
-                digimon_list[name]['url'] = wikimon_url+url
-                digimon_list[name]['kanji'] = kanji
-                digimon_list[name]['debut_year'] = debut_year
-                digimon_list[name]['debut'] = debut
-
-                # print(name, kanji, debut_year, debut, url)
-            
-            
-            # digimon_list[name]['description'] = 
-    except Exception:
-        print("Exception in user code:")
-        print("-"*60)
-        traceback.print_exc(file=sys.stdout)
-        print("-"*60) 
-    finally:
-        if len(newDigi) > 0:
-            print(f'Added {len(newDigi)} new digimon')
-            print(newDigi)
-            with open('digi_list.json', 'w') as outfile:
-                json.dump(digimon_list, outfile, sort_keys=True)
-        else:
-            print("No new digimon added")
-
-
-    # Descriptions in priority order: pnDigimonRefBookMultiMorphContent1, pn1aBandaiGamesMultiMorphContent1 pMiscMultiMorphContent1
-
-def scrapDescriptionsLegacy():
-
-    digimon_list = load_json()
-
-    limit = 20
-    digimon_processed = 0
-    digimon_desc_added = 0
-
-    no_description = []
-
-    for digimon, body in digimon_list.items():
-        if 'description' not in body:
-            # Scrap page and get description from first MultiMorphContent1
-             page = requests.get(body['url'])
-             soup = BeautifulSoup(page.content, 'html.parser')
-             div_content = soup.find_all('div')
-             flag = False
-             for div in div_content:
-                if 'id' in div.attrs:
-                    if "MultiMorphContent1" in div['id'] and len(div.text.strip()) > 0:
-                        body['description'] = div.text.strip().replace("⇨ Japanese","")
-                        # print(body)
-                        flag = True
-                        digimon_desc_added += 1
-                        break
-             if not flag:
-                print("No description found for ",digimon)
-                no_description.append(digimon)
-        digimon_processed += 1
-        if digimon_processed % 100 == 0:
-            print("Processed count", digimon_processed)
-        # if digimon_processed > limit:
-        #     break
-    
-    if digimon_desc_added > 0:
-        print(f'Added descriptions for {digimon_desc_added} digimon')
-        print("No description found for: ", no_description)
-        with open('digi_list.json', 'w') as outfile:
-            json.dump(digimon_list, outfile, sort_keys=True)
-    else:
-        print("No new digimon added")
 
 def scrapDescriptions(digimon, content, digi_obj, debug=False):
 
@@ -485,6 +373,8 @@ def scrapStats(digimon:str, content:dict, digi_obj:dict)->bool:
     romaji = scrap_stat_with_prefix(infoTemplate, 'rom', 0)
     romaji = romaji[0]['value'] if len(romaji) else ''
 
+    
+
     alt_names = {
         "titles": titles,
         "other_names": other_names,
@@ -507,6 +397,9 @@ def scrapStats(digimon:str, content:dict, digi_obj:dict)->bool:
      # name
     name = scrap_stat_with_prefix(infoTemplate, 'name', 0)
     name = name[0]['value'] if len(name) else digimon
+
+    etymology = scrap_stat_with_prefix(infoTemplate, 'ety', 0)
+    etymology = etymology[0]['value'] if len(etymology) else ''
      # code, com - ignore
     # d,q,io,d2ref,dlf,ed,featured,imagesize,ipa,it,n,nam,no,od,oj - ignore
     # q - Quote from tcg or anime
@@ -519,7 +412,8 @@ def scrapStats(digimon:str, content:dict, digi_obj:dict)->bool:
         "debut": debut,
         "alt_names": alt_names,
         "subspecies": subspecies,
-        "design_and_analysis": design_and_analysis
+        "design_and_analysis": design_and_analysis,
+        "etymology": etymology
     }
 
     digi_obj[digimon].update(stat_box)
@@ -727,18 +621,22 @@ def scrap_single_stat(infoTemplate:wtp.Template, prefix:str)->str:
         stat = unicodedata.normalize('NFKC', recursive_parse_template(replace_breaks(arg.value.strip())))
     return stat
 
-def scrap_stat_with_prefix(infoTemplate:wtp.Template, prefix:str, count:int)->list:
+def scrap_stat_with_prefix(infoTemplate:wtp.Template, prefix:str, count:int, delete_wikilinks:bool = False)->list:
     stat_list = []
+    if(not infoTemplate.has_arg(get_arg_name_from_prefix(prefix,count))):
+        count = 'l'
     while infoTemplate.has_arg(get_arg_name_from_prefix(prefix,count)):
         obj = {}
         base_arg = infoTemplate.get_arg(get_arg_name_from_prefix(prefix,count))
+        if count == 'l' and not base_arg.value.strip():
+            break
         if not base_arg.value.strip():
             if count > 0:
                 count += 1
             else:
                 count += 2
             continue
-        obj['value'] = unicodedata.normalize('NFKC', recursive_parse_template(replace_breaks(base_arg.value.strip())))
+        obj['value'] = unicodedata.normalize('NFKC', recursive_parse_template(replace_breaks(base_arg.value.strip()), delete_wikilinks))
         if prefix == 'dub':
             ref_arg = infoTemplate.get_arg('dref'+(str(count) if count>0 else ''))
         elif prefix == 'yd':
@@ -775,10 +673,14 @@ def scrap_stat_with_prefix(infoTemplate:wtp.Template, prefix:str, count:int)->li
         if not has_ref:
             obj['reference'] = ''
         stat_list.append(obj)
+        if count == 'l':
+            break
         if count > 0:
             count += 1
         else:
             count += 2
+        if(not infoTemplate.has_arg(get_arg_name_from_prefix(prefix,count))):
+            count = 'l'
     return stat_list
 
 def get_tag_property(tag:str, property:str, text:str)->str:
@@ -795,8 +697,11 @@ def get_tag_property(tag:str, property:str, text:str)->str:
         val = val[0:-1]
     return val
 
-def recursive_parse_template(content:str)->str:
+def recursive_parse_template(content:str, delete_wikilinks:bool = False)->str:
     parsed_content = wtp.parse(content)
+    if(delete_wikilinks):
+        for link in parsed_content.wikilinks:
+            del link.target
     while len(parsed_content.templates) > 0 or len(parsed_content.wikilinks) > 0 :
         content = parsed_content.plain_text(replace_templates= template_replacer)
         parsed_content = wtp.parse(content)
@@ -811,6 +716,14 @@ def remove_refs(content:str)->str:
     for ref in soup.find_all('ref'):
         ref.decompose()
     return soup.text
+
+def get_all_refs(content:str)->list:
+    soup = BeautifulSoup(content, 'lxml')
+    refs = []
+    for ref in soup.find_all('ref'):
+        if ref.text:
+            refs.append(ref.text)
+    return refs
 
 def replace_breaks(content:str)->str:
     return content.replace('<br>', '\n').replace('<br/>', '\n')
@@ -835,9 +748,9 @@ def template_replacer(template: wtp.Template)->str:
     match template.name.lower():
         case 'fc':
             return template.arguments[0].value
-        case 'w'|'wikt':
+        case 'w'|'wikt'|'ety':
             if len(template.arguments) == 1:
-                return template.arguments[0].value
+                return f'"{template.arguments[0].value}"'
             else:
                 return first_non_named_arg(template.arguments[1:])
         case 'at' | 'ato' | 'eq' | 'eqo':
@@ -853,7 +766,7 @@ def template_replacer(template: wtp.Template)->str:
                 return template.arguments[0].value
             else:
                 return f'{template.arguments[1].value} ({template.arguments[0].value})'
-        case 'fm'|'fmo'|'nn'|'nno':
+        case 'fm'|'fmo'|'nn'|'nno'|'fgm':
             if len(template.arguments) == 1:
                 return template.arguments[0].value
             else:
@@ -870,7 +783,7 @@ def template_replacer(template: wtp.Template)->str:
         case 'xab':
             return f'\nThe effect on {"/".join([t.value for t in template.arguments])}\'s Digicore due to the X-Antibody\n'
         case 'dd':
-            return 'Digimon Reference Book'
+            return ' (Digimon Reference Book) '
         case 'dl':
             return 'Digimon Life'
         case 'ref':
@@ -880,9 +793,13 @@ def template_replacer(template: wtp.Template)->str:
         case 'rfe':
             return f'Episode: {template.arguments[0].value}-{template.arguments[1].value} ({template.arguments[2].value})'
         case 'refd':
-            return f'{template.arguments[0].value} (https://digimon.net/reference/detail.php?directory_name={template.arguments[1].value})'
+            return f'{template.arguments[0].value} (https://digimon.net/reference/detail.php?directory_name={template.arguments[1].value if len(template.arguments)>1 else template.arguments[0].value.replace(" ", "").lower()})'
         case 'dcdapmhl':
             return f'[{template.arguments[0].value.strip().upper()}]'
+        case 'eng':
+            return '{English}'
+        case 'jp':
+            return '{Japanese}'
         case _:
             if len(template.arguments):
                 return template.arguments[0].value
@@ -917,36 +834,6 @@ def print_digimon_list():
 
     for digimon in digimon_list:
         print(digimon)
-
-def parse_content():
-    data = requests.get(url='https://wikimon.net/api.php',
-                        params= {
-                            'action': 'query',
-                            'prop': 'revisions',
-                            'titles': 'Agumon',
-                            'rvslots': '*',
-                            'rvprop': 'content',
-                            'format': 'json'
-                        })
-    data_obj = data.json()
-    pages = data_obj['query']['pages']
-
-    for id,body in pages.items():
-        wikitext = body['revisions'][0]['slots']['main']['*']
-        parsed = wtp.parse(wikitext)
-        sections = parsed.get_sections(top_levels_only=True, include_subsections=True)
-
-        # for section in sections:
-        #     print(len(section.sections))
-        # print("Length = ",len(sections))
-        templates = parsed.templates
-        count = 1
-        for template in templates:
-            print(f'{count} {template.name} =====================')
-            for arguments in template.arguments:
-                print(arguments.name, arguments.value)
-            count += 1
-        print(len(templates))
 
 def compare_keys():
     digimon_list = load_json()
@@ -1016,7 +903,6 @@ def get_evolutions_text_only(content:dict, digi_obj:dict, non_digi_obj:dict)->No
     # [[:Category:Perfect Level|Any Perfect Digimon]] belonging to either [[:Category:Metal Empire| Metal Empire]], or [[:Category:Nature Spirits|Nature Spirits]] with one of the [[Deva]]<ref name=D\u03b1-598>''[[D\u03b1-598]]''</ref>
 
     # invalid_list = []
-    session = requests.Session()
     for digimon in content:
         found_evo_from = False
         found_evo_to = False
@@ -1028,22 +914,45 @@ def get_evolutions_text_only(content:dict, digi_obj:dict, non_digi_obj:dict)->No
             if section.title and section.title.strip().lower()=='evolves from':
                 found_evo_from = True
                 lists = section.get_lists()
-                digi_obj[digimon]['evolve_from'] = process_evo_list_simple([item for list1 in lists for item in list1.items] if len(lists) else [], digi_obj, non_digi_obj, session)
+                digi_obj[digimon]['evolve_from'] = process_evo_list_simple([item for list1 in lists for item in list1.items] if len(lists) else [], digi_obj, non_digi_obj)
             if section.title and section.title.strip().lower()=='evolves to':
                 found_evo_to = True
                 lists = section.get_lists()
-                digi_obj[digimon]['evolve_to'] = process_evo_list_simple([item for list1 in lists for item in list1.items]  if len(lists) else [], digi_obj, non_digi_obj, session)
+                digi_obj[digimon]['evolve_to'] = process_evo_list_simple([item for list1 in lists for item in list1.items]  if len(lists) else [], digi_obj, non_digi_obj)
         if not found_evo_from:
             print(digimon,"did not have Evolves From section")
         if not found_evo_to:
             print(digimon,"did not have Evolves To section")
     # for non_digimon in non_digi_obj:
     #     digi_obj[non_digimon] = {}
+def get_evolutions_per_digimon(digimon: str, content:dict, digi_obj:dict, non_digi_obj:dict)->None:
+    found_evo_from = False
+    found_evo_to = False
+    if digimon not in digi_obj:
+        digi_obj[digimon] = {}
+    wikitext = wtp.parse(content[digimon]['wikitext'])
+    sections = wikitext.get_sections()
+    for section in sections:
+        if section.title and section.title.strip().lower()=='evolves from':
+            found_evo_from = True
+            lists = section.get_lists()
+            digi_obj[digimon]['evolve_from'] = process_evo_list_simple([item for list1 in lists for item in list1.items] if len(lists) else [], digi_obj, non_digi_obj)
+        if section.title and section.title.strip().lower()=='evolves to':
+            found_evo_to = True
+            lists = section.get_lists()
+            # print(*[item for list1 in lists for item in list1.items]  if len(lists) else [], sep='\n')
+            digi_obj[digimon]['evolve_to'] = process_evo_list_simple([item for list1 in lists for item in list1.items]  if len(lists) else [], digi_obj, non_digi_obj)
+    if not found_evo_from:
+            print(digimon,"did not have Evolves From section")
+    if not found_evo_to:
+        print(digimon,"did not have Evolves To section")
 def flatten(xss):
     return [x for xs in xss for x in xs]
 def find_and_resolve_all_evo_links(content:dict, digi_obj:dict)->None:
     evo_keys = set()
     session = requests.Session()
+    other_obj_changed = False
+    other_obj = load_non_digi_content()
     redirected_names_list = flatten([x['redirected_names'] for x in digi_obj.values() if 'redirected_names' in x])
     print(redirected_names_list)
     for digimon in content: 
@@ -1055,10 +964,9 @@ def find_and_resolve_all_evo_links(content:dict, digi_obj:dict)->None:
                 lists = section.get_lists()
                 evo_list = [item for list1 in lists for item in list1.items] if len(lists) else []
                 # print('Unknown keys', get_unknown_keys(evo_list, digi_obj))
-                evo_keys.update(get_unknown_keys(evo_list, digi_obj, redirected_names_list))
+                evo_keys.update(get_unknown_keys(evo_list, digi_obj, other_obj, redirected_names_list))
     digi_obj_changed = False
-    other_obj_changed = False
-    other_obj = load_non_digi_content()
+    
     for titles in get_digimon_list_for_api(value_list=evo_keys):
 
         params = f'action=query&prop=revisions&titles={titles}&rvslots=*&rvprop=content&format=json'
@@ -1117,7 +1025,12 @@ def check_wikilink_is_reference(link:wtp.WikiLink):
         return True
     else:
         return False
-def get_unknown_keys(evo_list:list, digi_obj:dict, redirected_names:list)->list:
+def check_wikilink_is_in_note(link:wtp.WikiLink):
+    if link.parent(type_='Template') and wtp.Template(link.parent(type_='Template').string).name == 'note':
+        return True
+    else:
+        return False
+def get_unknown_keys(evo_list:list, digi_obj:dict, non_digi_obj:dict, redirected_names:list)->list:
     keys = []
     for evo in evo_list:
         evo = evo.replace("'''", "").replace("''","").replace("\u200e","")
@@ -1130,7 +1043,7 @@ def get_unknown_keys(evo_list:list, digi_obj:dict, redirected_names:list)->list:
                 if check_wikilink_is_reference(link):
                     continue
                 evo_title = link.title
-                if not(evo_title in digi_obj or evo_title in redirected_names or evo_title.lower()=="digitama" or evo_title.lower()=="digixros" or 'Category' in evo_title):
+                if not(evo_title in digi_obj or evo_title in non_digi_obj or evo_title in redirected_names or evo_title.lower()=="digitama" or evo_title.lower()=="digixros" or 'Category' in evo_title):
                     keys.append(evo_title)
     return keys
 
@@ -1181,15 +1094,16 @@ def process_evo_list(evo_list:list,digi_obj:dict, non_digi_obj:dict, session:req
         prc_list.append(evo_obj)
     return prc_list
 
-def process_evo_list_simple(evo_list:list,digi_obj:dict, non_digi_obj:dict, session:requests.Session)->list:
+def process_evo_list_simple(evo_list:list,digi_obj:dict, non_digi_obj:dict)->list:
     prc_list = []
     for evo in evo_list:
         evo_obj = {}
         # If starts with ''', should mark as important
-        evo_obj['major'] = evo.startswith("'''")
+        evo_obj['major'] = evo.strip().startswith("'''")
         evo = evo.replace("'''", "")
         evo = evo.replace("''","").replace("\u200e","")
         evo_parse = wtp.parse(remove_refs(evo))
+        # references = get_all_refs(evo)
         if evo_parse.wikilinks:
             # evo_name = evo_parse.wikilinks[0].plain_text()
             i = 0
@@ -1198,7 +1112,7 @@ def process_evo_list_simple(evo_list:list,digi_obj:dict, non_digi_obj:dict, sess
             if i < len(evo_parse.wikilinks):
                 evo_title = evo_parse.wikilinks[0].title
                 if evo_title in digi_obj or deep_search_digi(evo_title, digi_obj)[0]:
-                    evo_obj = process_evo_simple(evo, 'digimon', digi_obj, non_digi_obj)
+                    evo_obj.update(process_evo_simple(evo, 'digimon', digi_obj, non_digi_obj))
                 # elif re.search("^any.*from.*card.*", evo_name.lower()):
                 #     evo_obj['valid_card'] = evo
                 
@@ -1208,24 +1122,26 @@ def process_evo_list_simple(evo_list:list,digi_obj:dict, non_digi_obj:dict, sess
                 evo_title == 'Digimon World: Digital Card Battle Attributes and Levels' or\
                 evo_title == 'Battle Spirits Card Game Colors and Levels' or\
                 evo_title == 'Digimon Card Game DigiXros'  :
-                    evo_obj = process_evo_simple(evo, 'card', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'card', digi_obj, non_digi_obj))
 
                 
                 elif evo_parse.plain_text().strip().startswith('Any'):
-                    evo_obj = process_evo_simple(evo, 'any', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'any', digi_obj, non_digi_obj))
                 elif evo_title.lower()=="digitama":
-                    evo_obj = process_evo_simple(evo, 'egg', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'egg', digi_obj, non_digi_obj))
                 elif evo_title.lower()=="digixros":
-                    evo_obj = process_evo_simple(evo, 'xros', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'xros', digi_obj, non_digi_obj))
                 elif deep_search_non_digi(evo_title, non_digi_obj):
-                    evo_obj = process_evo_simple(evo, 'non_digimon', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'non_digimon', digi_obj, non_digi_obj))
                 else:
-                    evo_obj = process_evo_simple(evo, 'text', digi_obj, non_digi_obj)
+                    evo_obj.update( process_evo_simple(evo, 'text', digi_obj, non_digi_obj))
             else:
                 process_evo_simple(evo, 'text', digi_obj, non_digi_obj)
         else:
-            evo_obj = process_evo_simple(evo, 'text', digi_obj, non_digi_obj)
-        prc_list.append(evo_obj)
+            evo_obj.update( process_evo_simple(evo, 'text', digi_obj, non_digi_obj))
+        # evo_obj['references'].extend(references)
+        if 'name' in evo_obj:
+            prc_list.append(evo_obj)
     return prc_list
 
 def deep_search_digi(name, digi_obj):
@@ -1353,7 +1269,7 @@ def process_evo_simple(evo_text:str, evo_type:str, digi_obj:dict, non_digi_obj:d
             split_pos = evo_text.lower().find('including ')
             if split_pos == -1:
                 has_fusees = False
-        if has_fusees:
+        if has_fusees: 
             evo_raw, fusees_raw = evo_text[:split_pos], evo_text[split_pos:]
         else:
             evo_raw = evo_text
@@ -1361,7 +1277,7 @@ def process_evo_simple(evo_text:str, evo_type:str, digi_obj:dict, non_digi_obj:d
         # Process primary evo
         evo_parse = wtp.parse(replace_ref_tag_with_template(evo_raw))
         for link in evo_parse.wikilinks:
-            if not check_wikilink_is_reference(link):
+            if not check_wikilink_is_reference(link) and not check_wikilink_is_in_note(link):
                 if evo_type == 'digimon':
                     if link.title in digi_obj:
                         evo_obj['name'] = link.title
@@ -1381,46 +1297,23 @@ def process_evo_simple(evo_text:str, evo_type:str, digi_obj:dict, non_digi_obj:d
                         evo_obj['unknown_param'].append(link.title)
                 elif evo_type == 'any':
                     evo_obj['name_text'] = link.text.strip() if link.text else ''
-            else:
-                evo_obj['references'].append(link.title)
         # Process fusees
         if has_fusees:
             condition_parse = wtp.parse(replace_ref_tag_with_template(fusees_raw))
             evo_obj['conditions']=condition_parse.plain_text(replace_wikilinks=False,replace_templates=template_replacer_refs)
-            # split_fusee_text = fusees_raw.split('or ')
-            # evo_obj['fusion'] = []
-            # for fusee_text in split_fusee_text:
-            #     fusee_obj = {'references': [], 'fusees': []}
-            #     fusee_parse = wtp.parse(replace_ref_tag_with_template(fusee_text))
-
-            #     if fusee_parse.wikilinks:
-            #         for link in fusee_parse.wikilinks:
-            #             if not check_wikilink_is_reference(link):
-            #                 per_fusee_obj = {}
-            #                 if link.title in digi_obj:
-            #                     per_fusee_obj['name'] = link.title
-            #                     per_fusee_obj['type'] = 'digimon'
-            #                 elif deep_search_digi(link.title, digi_obj)[0]:
-            #                     per_fusee_obj['name'] = deep_search_digi(link.title, digi_obj)[1]
-            #                     per_fusee_obj['type'] = 'digimon'
-            #                 elif deep_search_non_digi(link.title, non_digi_obj)[0]:
-            #                     per_fusee_obj['name'] = deep_search_non_digi(link.title, non_digi_obj)[1]
-            #                     per_fusee_obj['name_text'] = link.text.strip() if link.text else ''
-            #                     per_fusee_obj['type'] = 'non_digimon'
-            #                 else:
-            #                     per_fusee_obj['name_text'] = link.text.strip() if link.text else ''
-            #                     per_fusee_obj['type'] = 'unknown'
-            #                 fusee_obj['fusees'].append(per_fusee_obj)
-            #             else:
-            #                 fusee_obj['references'].append(link.title)
-            #     evo_obj['fusion'].append(fusee_obj)
         # Check for rfc templates
-        for template in wtp.parse(evo_text).templates:
+        for template in wtp.parse(replace_ref_tag_with_template(evo_text)).templates:
             if template.name == 'rfc':
                 if len(template.arguments) == 2:
                     evo_obj['references'].append(f'Card: {template.arguments[0].value}-{template.arguments[1].value}')
                 elif len(template.arguments) == 1:
                     evo_obj['references'].append(f'Card: {template.arguments[0].value}')
+            elif template.name == 'note':
+                evo_obj['references'].append(template.plain_text(replace_templates=template_replacer_refs))
+            elif template.name == 'ref':
+                ref = template.plain_text(replace_templates=template_replacer)
+                if ref:
+                    evo_obj['references'].append(ref) 
     else:
         if evo_type == 'egg' or evo_type == 'xros':
             for template in wtp.parse(evo_text).templates:
@@ -1450,6 +1343,8 @@ def template_replacer_refs(template: wtp.Template)->str:
             return f' (Episode: {template.arguments[0].value}-{template.arguments[1].value} ({template.arguments[2].value}))'
         case 'refd':
             return f' ({template.arguments[0].value} (https://digimon.net/reference/detail.php?directory_name={template.arguments[1].value}))'
+        case 'note':
+            return f'Note: {template.arguments[0].value}'
         case _:
             if len(template.arguments):
                 return template.arguments[0].value
@@ -1512,92 +1407,175 @@ def get_tcg(content, digimon, session=None):
             #     traceback.print_exc(file=sys.stdout)
             #     print("-"*60)
             # print(wtp.parse(data_obj['expandtemplates']['wikitext']).pformat())
+def compare_levels_ascending(digi1_obj, digi2_obj, digi1, digi2, digi2_evo):
+    if digi1.endswith('(X-Antibody)') and digi1.removesuffix(' (X-Antibody)') == digi2:
+        return False
+    elif digi2.endswith('(X-Antibody)') and digi2.removesuffix(' (X-Antibody)') == digi1:
+        return True
+    if len(digi2_evo['references']) == 1 and digi2_evo['references'][0] in ('DW2', "Digimon World 3", 'Bx-136'):
+        return False
+    level_order = ['Baby I','Baby II', 'Child', 'Adult', 'Armor', 'Perfect', 'Hybrid', 'Ultimate', 'No Level', '', 'None', '(?)', 'Unknown']
+    hybrid_pseudo_levels = {'Daipenmon': 'Hybrid', 'Fairimon': 'Adult', 'Agnimon': 'Adult', 'Kaiser Leomon': 'Ultimate', 'Magna Garurumon': 'Ultimate', 'Rhino Kabuterimon': 'Hybrid', 'Aldamon': 'Hybrid', 'Kaiser Greymon': 'Ultimate', 'Jet Silphymon': 'Hybrid', 'Beowolfmon': 'Hybrid', 'Duskmon': 'Adult', 'Blizzarmon': 'Perfect', 'Arbormon': 'Adult', 'Petaldramon': 'Perfect', 'Calamaramon': 'Perfect', 'Shutumon': 'Perfect', 'Wolfmon': 'Adult', 'Chackmon': 'Adult', 'Flamon': 'Child', 'Strabimon': 'Child', 'Ranamon': 'Adult', 'Blitzmon': 'Adult', 'Raihimon': 'Hybrid', 'Löwemon': 'Adult', 'Velgrmon': 'Perfect', 'Grottemon': 'Adult', 'Gigasmon': 'Perfect', 'Vritramon': 'Perfect', 'Sephirothmon': 'Perfect', 'Mercuremon': 'Adult', 'Bolgmon': 'Perfect', 'Garummon': 'Perfect'}
+    digi1_levels, digi2_levels = None, None
+    if 'stats' in digi1_obj and 'levels' in digi1_obj['stats'] and digi1_obj['stats']['levels']:
+        digi1_levels = digi1_obj['stats']['levels']
+    if 'stats' in digi2_obj and 'levels' in digi2_obj['stats'] and digi2_obj['stats']['levels']:
+        digi2_levels = digi2_obj['stats']['levels']
+    
+    level1, level2 = '', ''
+    drb_lvl_index1, drb_lvl_index2 = None, None
+    if digi1_levels:
+        drb_lvl_index1 = next((index for (index, d) in enumerate(digi1_levels) if d["reference"] == "(Digimon Reference Book)"), None)
+    if digi2_levels:
+        drb_lvl_index2 = next((index for (index, d) in enumerate(digi2_levels) if d["reference"] == "(Digimon Reference Book)"), None)
+    if not drb_lvl_index1:
+        level1 = digi1_levels[0]['value'] if digi1_levels and len(digi1_levels)>0 else ''
+    if not drb_lvl_index2:
+        level2 = digi2_levels[0]['value'] if digi2_levels and len(digi2_levels)>0 else ''
+    
+    if (level1 == 'Hybrid' and level2 == 'Hybrid' and level_order.index(hybrid_pseudo_levels[digi1]) < level_order.index(hybrid_pseudo_levels[digi2])) or (level1 == 'Ultimate' and level2 == 'Ultimate' and digi2_evo['has_fusees']) or (level1 == level2 and digi2.startswith(digi1)) or level_order.index(level1) < level_order.index(level2):
+        return True
+    else:
+        return False
 
 def sort_in_drb_order():
     digi_obj = load_json()
     no_index_count = 0
     for key in digi_obj.keys():
-        if 'name' not in digi_obj[key]:
-            digi_obj[key]['name'] = key
+        digi_obj[key]['key_name'] = key
         if 'drb_index' not in digi_obj[key]:
-            digi_obj[key]['drb_index'] = -1
+            digi_obj[key]['drb_index'] = 9999
             no_index_count += 1
     digi_list = list(digi_obj.values())
     # print(digi_list)
     digi_list.sort(key=lambda x:x['drb_index'])
-    with open('drb_order.txt', 'w') as outfile:
-        for x in digi_list:
-            outfile.write(f'{x['drb_index']} {x['name']}\n')
-        outfile.write(f'Digimon count with no index = {no_index_count}')
-# print(get_digimon_list_for_api())
+    return digi_list
 
-# resolve_redirects(requests.Session(), load_content_json())
-# main(None, None)
-# print_digimon_list()
-# parse_content()
-# compare_keys()
+def sort_drb_order_plus_topological():
+    drb_sorted = sort_in_drb_order()
+    digi_obj = load_json()
+    graph = {}
+    hybrid_list = []
+    for digimon in drb_sorted:
+        level = ''
+        if 'stats' in digimon and 'levels' in digimon['stats'] and digimon['stats']['levels']:
+            level = digimon['stats']['levels'][0]['value']
+        if level == 'Hybrid':
+            hybrid_list.append(digimon['key_name'])
+        next_evos = set()
+        if 'evolve_to' in digimon:
+            for evo in digimon['evolve_to']:
+                if 'name' not in evo:
+                    print(evo)
+                if evo['name'] in graph and digimon['key_name'] in graph[evo['name']]:
+                    continue
+                
+                if evo['type'] == 'digimon' and evo['name'] != digimon['key_name'] and compare_levels_ascending(digi_obj[digimon['key_name']], digi_obj[evo['name']], digimon['key_name'], evo['name'], evo):
+                    next_evos.add(evo['name'])
+        graph[digimon['key_name']] = next_evos
+    print(hybrid_list)
+    reverse_graph = {}
+    for digi in drb_sorted:
+        reverse_graph[digi['key_name']] = set()
+    for prev_digi, next_digis in graph.items():
+        for nd in next_digis:
+            reverse_graph[nd].add(prev_digi)
+    ts = graphlib.TopologicalSorter(reverse_graph)
+    stable_order = list(ts.static_order())
+    # with open('topo_sort.txt', 'w', encoding='utf-8') as outfile:
+    #     for digi in stable_order:
+    #         level = ''
+    #         if 'stats' in digi_obj[digi] and 'levels' in digi_obj[digi]['stats'] and digi_obj[digi]['stats']['levels']:
+    #             level = digi_obj[digi]['stats']['levels'][0]['value']
+    #         outfile.write(f'{digi} {digi_obj[digi]['drb_index'] if 'drb_index' in digi_obj[digi] else '-1'} {level}\n')
+    return stable_order
 
 
+def scrapAttackTechs(digimon:str, content:dict, digi_obj:dict, debug:bool = False)->bool:
+    wikitext = wtp.parse(content[digimon]['wikitext'])
+    tech_template = next((x for x in wikitext.templates if  x.name != None and x.name.strip() == 'T'), None)
+    if(tech_template==None):
+        return False
+    if debug:
+        tech_section = next((x for x in wikitext.sections if  x.title != None and x.title.strip() == 'Attack Techniques'), None)
+        if(tech_section!=None):
+            print(tech_section)
+    names = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'name', 0, True)]
+    translations = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'trans', 0, True)]
+    kanjis = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'kan', 0, True)]
+    romajis = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'rom', 0, True)]
+    dubs = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'd', 0, True)]
+    descriptions = [remove_refs(x['value']) for x in scrap_stat_with_prefix(tech_template, 'desc', 0, True)]
 
-# Scraping descriptions
-# for digimon in content:
-#     scrapDescriptions(digimon, content, digi_obj)
+    if debug:
+        print(names, translations, kanjis, romajis, dubs, descriptions)
+    attack_techs = []
+    for i in range(len(names)):
+        if len(names[i]) == 0:
+            continue
+        tech = {}
+        tech['name'] = names[i]
+        tech['translation'] = translations[i] if len(translations) > 0 else ''
+        tech['kanji'] = kanjis[i] if len(kanjis) > 0 else ''
+        tech['romaji'] = romajis[i] if len(romajis) > 0 else ''
+        tech['dub_name'] = dubs[i] if len(dubs) > 0 else ''
+        tech['description'] = descriptions[i] if len(descriptions) > 0 else ''
 
-# with open('digi_descriptions.json', 'w') as outfile:
-#     json.dump(digi_obj, outfile, sort_keys=True)
-
-# pretty_print('Holy Angemon', content)
-# get_digimon_list()
-
+        attack_techs.append(tech)
+    digi_obj[digimon]['attack_techniques'] = attack_techs
+    return True
 # Main section starts here
-scrap_and_save_page_content()
-compare_keys()
-content = load_content_json()
-digi_obj = load_json()
-non_digi_obj = load_non_digi_content()
-evo_obj = {}
-last_digimon_updated = ''
-try:
-    for digimon in content:
-        last_digimon_updated = digimon
-        scrapDescriptions(digimon, content, digi_obj)
-        scrapStats(digimon, content, digi_obj)
-        get_gallery_images(content, digimon, digi_obj)
+def refresh_list(refresh_all:bool = True):
+    content = load_content_json()
+    digi_obj = load_json()
+    try:
+        new_digi = scrap_and_save_page_content()
+        compare_keys()
+        content = load_content_json()
+        digi_obj = load_json()
+        non_digi_obj = load_non_digi_content()
+        last_digimon_updated = ''
+        digimon_list = []
+        if(refresh_all):
+            digimon_list = list(content.keys())
+        else:
+            digimon_list = new_digi
+
+        find_and_resolve_all_evo_links(content, digi_obj)
+        scrap_drb_index(content, digi_obj)
+
+        for digimon in digimon_list:
+            last_digimon_updated = digimon
+            scrapDescriptions(digimon, content, digi_obj)
+            scrapStats(digimon, content, digi_obj)
+            get_gallery_images(content, digimon, digi_obj)
+            scrapAttackTechs(digimon, content, digi_obj)
+            get_evolutions_per_digimon(digimon, content, digi_obj, non_digi_obj)
         
-    find_and_resolve_all_evo_links(content, digi_obj)
-    scrap_drb_index(content, digi_obj)
-    get_evolutions_text_only(content,digi_obj, non_digi_obj)
-    
-except Exception:
-        print("Exception in user code:")
-        print("-"*60)
-        traceback.print_exc(file=sys.stdout)
-        print(f'Last digimon updated: {last_digimon_updated}')
-        print("-"*60) 
-finally:
-    # split_dict = {}
-    # count = 0
-    # for key, value in evo_obj.items():
-    #     split_dict[key] = value
-    #     count += 1
-    #     if count % 100 == 0:
-    #          with open(f'evo_json_splits/evo_list_{count/100}.json', 'w') as outfile:
-    #             json.dump(split_dict, outfile, sort_keys=True)
-    #          split_dict = {}
-    # with open(f'evo_json_splits/evo_list_{(count/100)+1}.json', 'w') as outfile:
-    #         json.dump(split_dict, outfile, sort_keys=True)
-    # print(count)
-    with open('digi_list.json', 'w') as outfile:
-        json.dump(digi_obj, outfile, sort_keys=True)
+    except Exception:
+            print("Exception in user code:")
+            print("-"*60)
+            traceback.print_exc(file=sys.stdout)
+            print(f'Last digimon updated: {last_digimon_updated}')
+            print("-"*60) 
+    finally:
+        with open('digi_list.json', 'w') as outfile:
+            json.dump(digi_obj, outfile, sort_keys=True)
    
 
 # Main section ends here
 
-# get_absent_digimon(digi_obj)
+def test():
+    # digi_obj = load_json()
+    # content = load_content_json()
+    # non_digi_obj = load_non_digi_content()
 
-# sort_in_drb_order()
-# get_evolutions(content,digi_obj, non_digi_obj)
+    # get_evolutions_per_digimon('Vorvomon', content, digi_obj, non_digi_obj)
+    # print(json.dumps(digi_obj['Vorvomon']['evolve_to'], indent=4))
+    # sort_drb_order_plus_topological()
+    scrap_images.scrap_image_urls()
 
-# scrapStats('Agumon', content, digi_obj)
+# refresh_list(refresh_all=False)
+test()
 
 
