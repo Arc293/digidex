@@ -1525,7 +1525,7 @@ def scrapAttackTechs(digimon:str, content:dict, digi_obj:dict, debug:bool = Fals
     digi_obj[digimon]['attack_techniques'] = attack_techs
     return True
 # Main section starts here
-def refresh_list(refresh_all:bool = True):
+def refresh_list(refresh_all:bool = False):
     content = load_content_json()
     digi_obj = load_json()
     try:

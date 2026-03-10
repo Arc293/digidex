@@ -1,0 +1,266 @@
+"""
+supabase_sync.py
+Helpers for reading from and writing Digimon/Non-Digimon data to Supabase (PostgreSQL).
+
+Tables:
+  digimon
+  attack_techniques  (FK → digimon.id, CASCADE DELETE)
+  image_gallery      (FK → digimon.id, CASCADE DELETE)
+  evolutions         (FK → digimon.id, CASCADE DELETE)
+  non_digimon
+  universe
+"""
+
+import json
+import logging
+import os
+from datetime import datetime, timezone
+
+from supabase import create_client, Client
+
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Supabase client (lazy singleton)
+# ---------------------------------------------------------------------------
+
+_client: Client | None = None
+
+
+def get_db() -> Client:
+    global _client
+    if _client is None:
+        url = os.environ["SUPABASE_URL"]
+        key = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
+        _client = create_client(url, key)
+    return _client
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+# ---------------------------------------------------------------------------
+# Read helpers
+# ---------------------------------------------------------------------------
+
+def get_all_digimon_revision_dates() -> dict[str, str]:
+    """
+    Returns {digimon_name: last_scraped_revision} for all rows in digimon.
+    Used to detect which pages need re-scraping.
+    """
+    db = get_db()
+    rows = db.table("digimon").select("id, last_scraped_revision").execute().data
+    return {row["id"]: row.get("last_scraped_revision", "") for row in rows}
+
+
+def get_all_non_digimon_keys() -> set[str]:
+    """Returns the set of all non_digimon IDs (page titles)."""
+    db = get_db()
+    rows = db.table("non_digimon").select("id").execute().data
+    return {row["id"] for row in rows}
+
+
+# ---------------------------------------------------------------------------
+# Build helpers
+# ---------------------------------------------------------------------------
+
+def _build_digimon_row(digi_data: dict, revision_date: str) -> dict:
+    """
+    Transforms a scraped digimon dict into a flat PostgreSQL row.
+    Mirrors the logic of firestore_sync._build_digimon_main_doc().
+    """
+    stats_raw = digi_data.get("stats", {})
+
+    # Flat filterable arrays
+    stat_levels     = [s["value"] for s in stats_raw.get("levels", [])]
+    stat_attributes = [s["value"] for s in stats_raw.get("attributes", [])]
+    stat_fields     = [s["value"] for s in stats_raw.get("fields", [])]
+    stat_type       = [s["value"] for s in stats_raw.get("type", [])]
+
+    # Full stats JSONB (includes references + flat arrays for convenience)
+    stats_jsonb = {
+        "levels":           stat_levels,
+        "attributes":       stat_attributes,
+        "fields":           stat_fields,
+        "groups":           [s["value"] for s in stats_raw.get("groups", [])],
+        "type":             stat_type,
+        "weight":           [s["value"] for s in stats_raw.get("weight", [])],
+        "class_type":       stats_raw.get("class_type", {}),
+        "equipment":        stats_raw.get("equipment", []),
+        "levels_full":      stats_raw.get("levels", []),
+        "attributes_full":  stats_raw.get("attributes", []),
+        "fields_full":      stats_raw.get("fields", []),
+        "type_full":        stats_raw.get("type", []),
+        "weight_full":      stats_raw.get("weight", []),
+    }
+
+    # Build flat search_names (all known names, deduplicated)
+    alt = digi_data.get("alt_names", {})
+    search_names = list({
+        digi_data.get("name", ""),
+        alt.get("romaji", ""),
+        alt.get("development_name", ""),
+        *alt.get("kanji", []),
+        *[d["value"] for d in alt.get("dub_names", []) if d.get("value")],
+        *(
+            [alt["other_names"]["value"]]
+            if isinstance(alt.get("other_names"), dict) and alt["other_names"].get("value")
+            else []
+        ),
+        *digi_data.get("redirected_names", []),
+    } - {""})
+
+    return {
+        "id":                   digi_data.get("name", ""),   # overridden by caller with page title
+        "name":                 digi_data.get("name", ""),
+        "drb_index":            digi_data.get("drb_index", 9999),
+        "description":          digi_data.get("description", ""),
+        "description_japanese": digi_data.get("description_japanese", ""),
+        "description_source":   digi_data.get("description_source", ""),
+        "design_and_analysis":  digi_data.get("design_and_analysis", ""),
+        "etymology":            digi_data.get("etymology", ""),
+        "images":               digi_data.get("images", []),
+        "redirected_names":     digi_data.get("redirected_names", []),
+        "search_names":         search_names,
+        "stat_levels":          stat_levels,
+        "stat_attributes":      stat_attributes,
+        "stat_fields":          stat_fields,
+        "stat_type":            stat_type,
+        "stats":                stats_jsonb,
+        "debut":                digi_data.get("debut", {}),
+        "alt_names":            alt,
+        "subspecies":           digi_data.get("subspecies", []),
+        "last_scraped_revision": revision_date,
+        "last_updated":         _now(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Write helpers — Digimon
+# ---------------------------------------------------------------------------
+
+def upsert_digimon(name: str, digi_data: dict, revision_date: str) -> None:
+    """
+    Upsert a digimon row and sync all related rows in child tables.
+    """
+    db = get_db()
+
+    # Main row
+    row = _build_digimon_row(digi_data, revision_date)
+    row["id"] = name   # use the wikimon page title as PK (no encoding needed in PostgreSQL)
+    db.table("digimon").upsert(row).execute()
+
+    # attack_techniques — upsert by (digimon_id, name)
+    techs = digi_data.get("attack_techniques", [])
+    if techs:
+        db.table("attack_techniques").delete().eq("digimon_id", name).execute()
+        db.table("attack_techniques").insert([
+            {
+                "digimon_id":   name,
+                "name":         t.get("name", ""),
+                "translation":  t.get("translation", ""),
+                "kanji":        t.get("kanji", ""),
+                "romaji":       t.get("romaji", ""),
+                "dub_name":     t.get("dub_name", ""),
+                "description":  t.get("description", ""),
+            }
+            for t in techs
+        ]).execute()
+
+    # image_gallery — replace all
+    gallery = digi_data.get("image_gallery", [])
+    if gallery:
+        db.table("image_gallery").delete().eq("digimon_id", name).execute()
+        db.table("image_gallery").insert([
+            {
+                "digimon_id": name,
+                "image":      g.get("image", ""),
+                "caption":    g.get("caption", ""),
+            }
+            for g in gallery
+        ]).execute()
+
+    # evolutions — replace all (direction injected here)
+    evo_rows = []
+    for evo in digi_data.get("evolve_from", []):
+        evo_rows.append({**_build_evo_row(evo), "digimon_id": name, "direction": "from"})
+    for evo in digi_data.get("evolve_to", []):
+        evo_rows.append({**_build_evo_row(evo), "digimon_id": name, "direction": "to"})
+
+    db.table("evolutions").delete().eq("digimon_id", name).execute()
+    if evo_rows:
+        db.table("evolutions").insert(evo_rows).execute()
+
+    logger.info(f"Upserted digimon: {name}")
+
+
+def _build_evo_row(evo: dict) -> dict:
+    return {
+        "type":             evo.get("type", ""),
+        "name":             evo.get("name", ""),
+        "name_text":        evo.get("name_text", ""),
+        "major":            bool(evo.get("major", False)),
+        "has_fusees":       bool(evo.get("has_fusees", False)),
+        "conditions":       evo.get("conditions", ""),
+        "is_special_evo":   bool(evo.get("is_special_evo", False)),
+        "special_evo_type": evo.get("special_evo_type", ""),
+        "evo_references":   evo.get("references", []),
+        "unknown_param":    evo.get("unknown_param", []),
+        "link":             evo.get("link", ""),
+    }
+
+
+def delete_digimon(name: str) -> None:
+    """
+    Delete a digimon row — CASCADE constraints handle child table rows.
+    """
+    db = get_db()
+    db.table("digimon").delete().eq("id", name).execute()
+    logger.info(f"Deleted digimon: {name}")
+
+
+# ---------------------------------------------------------------------------
+# Write helpers — Non-Digimon
+# ---------------------------------------------------------------------------
+
+def upsert_non_digimon(name: str, entity_data: dict, revision_date: str = "") -> None:
+    db = get_db()
+    db.table("non_digimon").upsert({
+        "id":                   name,
+        "name":                 name,
+        "wikitext":             entity_data.get("wikitext", ""),
+        "redirected_names":     entity_data.get("redirected_names", []),
+        "last_scraped_revision": revision_date,
+        "last_updated":         _now(),
+    }).execute()
+    logger.info(f"Upserted non_digimon: {name}")
+
+
+# ---------------------------------------------------------------------------
+# Write helpers — Universe registry
+# ---------------------------------------------------------------------------
+
+def ensure_universe(universe_id: str, name: str, description: str = "") -> None:
+    """Creates the universe row if it does not exist."""
+    db = get_db()
+    existing = db.table("universe").select("id").eq("id", universe_id).execute().data
+    if not existing:
+        db.table("universe").insert({
+            "id":          universe_id,
+            "name":        name,
+            "description": description,
+            "created_at":  _now(),
+            "last_updated": _now(),
+        }).execute()
+        logger.info(f"Created universe: {universe_id}")
+
+
+def touch_universe(universe_id: str) -> None:
+    """Update last_updated on a universe row."""
+    db = get_db()
+    db.table("universe").update({"last_updated": _now()}).eq("id", universe_id).execute()
