@@ -29,7 +29,7 @@ def _api_get(session: requests.Session, params: str, timeout: int = 30) -> dict:
     GET the wikimon API with the given pre-encoded query string.
     Raises RuntimeError with the raw response text if JSON decoding fails.
     """
-    resp = session.get(url=WIKIMON_API_URL, params=params, timeout=timeout)
+    resp = session.get(url=f"{WIKIMON_API_URL}?{params}", timeout=timeout)
     if not resp.ok:
         raise RuntimeError(f"wikimon API error {resp.status_code}: {resp.text[:500]}")
     text = resp.text
