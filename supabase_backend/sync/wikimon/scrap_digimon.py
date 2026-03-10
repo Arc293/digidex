@@ -9,7 +9,7 @@ returned as plain Python dicts ready for Firestore.
 import re
 import urllib.parse
 import logging
-import requests
+from curl_cffi import requests
 import wikitextparser as wtp
 import unicodedata
 from datetime import datetime
@@ -64,7 +64,7 @@ def _get_digimon_list_for_api(value_list: list[str]) -> list[str]:
 
 
 def _make_session() -> requests.Session:
-    s = requests.Session()
+    s = requests.Session(impersonate="chrome120")
     s.headers.update(_SESSION_HEADERS)
     return s
 
