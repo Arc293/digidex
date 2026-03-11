@@ -264,3 +264,29 @@ def touch_universe(universe_id: str) -> None:
     """Update last_updated on a universe row."""
     db = get_db()
     db.table("universe").update({"last_updated": _now()}).eq("id", universe_id).execute()
+
+
+# ---------------------------------------------------------------------------
+# Write helpers — Image URLs
+# ---------------------------------------------------------------------------
+
+def get_all_image_url_ids() -> set[str]:
+    """Returns the set of all image filenames already stored in image_urls."""
+    db = get_db()
+    rows = db.table("image_urls").select("id").execute().data
+    return {row["id"] for row in rows}
+
+
+def upsert_image_urls(image_obj: dict[str, str]) -> None:
+    """
+    Upsert {filename: url} entries into the image_urls table.
+    Operates in batches of 500 to stay within Supabase request limits.
+    """
+    if not image_obj:
+        return
+    db = get_db()
+    rows = [{"id": fname, "url": url} for fname, url in image_obj.items()]
+    batch_size = 500
+    for i in range(0, len(rows), batch_size):
+        db.table("image_urls").upsert(rows[i : i + batch_size]).execute()
+    logger.info(f"Upserted {len(rows)} image URL entries.")

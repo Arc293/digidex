@@ -16,13 +16,16 @@ import sys
 
 from wikimon.supabase_sync import (
     get_all_digimon_revision_dates,
+    get_all_image_url_ids,
     upsert_digimon,
     upsert_non_digimon,
+    upsert_image_urls,
     delete_digimon,
     ensure_universe,
     touch_universe,
 )
 from wikimon.scrap_digimon import sync_digimon
+from wikimon.scrap_images import sync_image_urls
 
 logging.basicConfig(
     level=logging.INFO,
@@ -73,10 +76,19 @@ def _run_sync(refresh_all: bool = False) -> dict:
 
     touch_universe("digimon")
 
+    # Image URL sync
+    existing_url_ids = get_all_image_url_ids()
+    image_obj = sync_image_urls(digi_obj, existing_url_ids, refresh_all=refresh_all)
+    try:
+        upsert_image_urls(image_obj)
+    except Exception:
+        logger.exception("Failed to upsert image URLs")
+
     summary = {
         "updated": updated_count,
         "non_digimon_upserted": non_digi_count,
         "deleted": deleted_count,
+        "images_fetched": len(image_obj),
         "refresh_all": refresh_all,
     }
     logger.info(f"Sync complete: {summary}")
