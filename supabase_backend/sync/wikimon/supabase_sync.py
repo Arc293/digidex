@@ -307,7 +307,6 @@ def upsert_image_urls(image_obj: dict[str, str]) -> None:
         return
     db = get_db()
     rows = [{"id": fname, "url": url} for fname, url in image_obj.items()]
-    batch_size = 500
-    for i in range(0, len(rows), batch_size):
-        db.table("image_urls").upsert(rows[i : i + batch_size]).execute()
+    for i in range(0, len(rows), _BATCH_SIZE):
+        db.table("image_urls").upsert(rows[i : i + _BATCH_SIZE]).execute()
     logger.info(f"Upserted {len(rows)} image URL entries.")
