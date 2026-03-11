@@ -13,10 +13,12 @@ supabase_backend/
 ├── migrations/
 │   └── 001_initial_schema.sql   # Run once in Supabase SQL editor
 └── sync/
+    ├── .env                     # Local secrets (gitignored — never committed)
     ├── requirements.txt
     ├── main.py                  # Sync entry point
     └── wikimon/
         ├── scrap_digimon.py     # wikimon.net scraper
+        ├── scrap_images.py      # image URL scraper
         └── supabase_sync.py     # Supabase read/write helpers
 .github/
 └── workflows/
@@ -38,22 +40,23 @@ In the Supabase dashboard → **SQL Editor** → paste and run `migrations/001_i
 
 This creates all tables, indexes, and RLS policies.
 
-### 3. Add GitHub secrets
+### 3. Configure local secrets
 
-In your GitHub repo → **Settings → Secrets and variables → Actions**, add:
+Create `supabase_backend/sync/.env` (gitignored, never committed):
 
-| Secret | Value |
-|--------|-------|
-| `SUPABASE_URL` | Your project URL (e.g. `https://xxxx.supabase.co`) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Service role key from Supabase dashboard |
+```
+SUPABASE_URL=https://xxxx.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
 
-### 4. Run the initial sync
+Both values are in the Supabase dashboard under **Settings → API**:
+- `SUPABASE_URL` → "Project URL"
+- `SUPABASE_SERVICE_ROLE_KEY` → "service_role" key
 
-Trigger the GitHub Actions workflow manually:
-- Go to **Actions → Digimon Sync → Run workflow**
-- Check **Re-scrape all pages** for the first run
+> The service role key bypasses Row Level Security and is required for the sync
+> script to write data. Never use it in frontend code — use the `anon` key there.
 
-Or run locally:
+### 4. Run the initial sync locally
 
 ```bash
 cd supabase_backend/sync
@@ -61,34 +64,42 @@ python -m venv .venv
 source .venv/bin/activate       # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-export SUPABASE_URL=https://xxxx.supabase.co
-export SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-
-python main.py --refresh-all    # full sync
+python main.py --refresh-all    # full sync (first run)
 python main.py                  # incremental sync
 ```
+
+The `.env` file is loaded automatically — no need to export environment variables manually.
 
 ---
 
 ## Scheduled Sync
 
-The GitHub Actions workflow (`digimon-sync.yml`) runs automatically every day at **4 AM UTC**.
-It performs an incremental sync — only pages whose wikimon revision timestamp is newer than
-the stored `last_scraped_revision` are re-scraped.
+The GitHub Actions workflow (`digimon-sync.yml`) is configured to run automatically but
+requires a **self-hosted runner** because GitHub's hosted runners are blocked by Cloudflare
+on wikimon.net.
 
-To trigger a full re-scrape manually, run the workflow with **Re-scrape all pages** checked.
+To register your machine as a self-hosted runner:
+- Go to your GitHub repo → **Settings → Actions → Runners → New self-hosted runner**
+- Follow the setup instructions for your OS
+
+The workflow performs an incremental sync — only pages whose wikimon revision timestamp is
+newer than the stored `last_scraped_revision` are re-scraped.
+
+To trigger manually: **Actions → Digimon Sync → Run workflow**.
+Check **Re-scrape all pages** only when you want to force a full re-scrape.
 
 ---
 
 ## Database Schema
 
 ```
-universe          — sync registry
+universe          — sync registry (last_updated timestamp)
 digimon           — main digimon data (filterable flat columns + JSONB for nested fields)
   ↳ attack_techniques  — attack moves (FK → digimon.id, CASCADE)
   ↳ image_gallery      — images (FK → digimon.id, CASCADE)
   ↳ evolutions         — evolution links (FK → digimon.id, CASCADE)
-non_digimon       — non-digimon entities referenced in evolution trees
+non_digimon       — non-digimon entities referenced in evolution trees (raw wikitext stored)
+image_urls        — image filename → CDN URL mappings (scraped from wikimon)
 ```
 
 ---
