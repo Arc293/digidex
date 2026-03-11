@@ -10,7 +10,7 @@ Entry point:
 
 import urllib.parse
 import logging
-from curl_cffi import requests
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ _SESSION_HEADERS = {
 
 
 def _make_session() -> requests.Session:
-    s = requests.Session(impersonate="chrome120")
+    s = requests.Session()
     s.headers.update(_SESSION_HEADERS)
     return s
 
