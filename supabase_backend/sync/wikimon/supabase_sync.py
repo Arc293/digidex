@@ -48,20 +48,39 @@ def _now() -> str:
 # Read helpers
 # ---------------------------------------------------------------------------
 
+def _fetch_all_rows(table: str, columns: str) -> list[dict]:
+    """Paginate through all rows of a table, bypassing the default 1000-row limit."""
+    db = get_db()
+    result = []
+    page_size = 1000
+    offset = 0
+    while True:
+        rows = (
+            db.table(table)
+            .select(columns)
+            .range(offset, offset + page_size - 1)
+            .execute()
+            .data
+        )
+        result.extend(rows)
+        if len(rows) < page_size:
+            break
+        offset += page_size
+    return result
+
+
 def get_all_digimon_revision_dates() -> dict[str, str]:
     """
     Returns {digimon_name: last_scraped_revision} for all rows in digimon.
     Used to detect which pages need re-scraping.
     """
-    db = get_db()
-    rows = db.table("digimon").select("id, last_scraped_revision").execute().data
+    rows = _fetch_all_rows("digimon", "id, last_scraped_revision")
     return {row["id"]: row.get("last_scraped_revision", "") for row in rows}
 
 
 def get_all_non_digimon_keys() -> set[str]:
     """Returns the set of all non_digimon IDs (page titles)."""
-    db = get_db()
-    rows = db.table("non_digimon").select("id").execute().data
+    rows = _fetch_all_rows("non_digimon", "id")
     return {row["id"] for row in rows}
 
 
@@ -293,8 +312,7 @@ def touch_universe(universe_id: str) -> None:
 
 def get_all_image_url_ids() -> set[str]:
     """Returns the set of all image filenames already stored in image_urls."""
-    db = get_db()
-    rows = db.table("image_urls").select("id").execute().data
+    rows = _fetch_all_rows("image_urls", "id")
     return {row["id"] for row in rows}
 
 
