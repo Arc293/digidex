@@ -53,6 +53,15 @@ def _run_sync(refresh_all: bool = False) -> dict:
         existing_non_digi={},
     )
 
+    # Image URLs must be written before digimon batch — image_gallery.image
+    # has a FK referencing image_urls.id, so the referenced rows must exist first.
+    existing_url_ids = get_all_image_url_ids()
+    image_obj = sync_image_urls(digi_obj, existing_url_ids, refresh_all=refresh_all)
+    try:
+        upsert_image_urls(image_obj)
+    except Exception:
+        logger.exception("Failed to upsert image URLs")
+
     try:
         upsert_digimon_batch(digi_obj)
     except Exception:
@@ -74,14 +83,6 @@ def _run_sync(refresh_all: bool = False) -> dict:
             logger.exception(f"Failed to delete digimon '{name}'")
 
     touch_universe("digimon")
-
-    # Image URL sync
-    existing_url_ids = get_all_image_url_ids()
-    image_obj = sync_image_urls(digi_obj, existing_url_ids, refresh_all=refresh_all)
-    try:
-        upsert_image_urls(image_obj)
-    except Exception:
-        logger.exception("Failed to upsert image URLs")
 
     summary = {
         "updated": updated_count,
