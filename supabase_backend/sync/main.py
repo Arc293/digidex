@@ -13,6 +13,10 @@ Environment variables (required):
 
 import logging
 import sys
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent / ".env")
 
 from wikimon.supabase_sync import (
     get_all_digimon_revision_dates,
