@@ -316,6 +316,30 @@ def get_all_image_url_ids() -> set[str]:
     return {row["id"] for row in rows}
 
 
+def get_missing_image_filenames() -> set[str]:
+    """
+    Returns image filenames referenced in image_gallery or digimon.images
+    that have no entry in image_urls yet.
+
+    Used to backfill gaps left by partial or incremental syncs.
+    """
+    existing = get_all_image_url_ids()
+
+    # Filenames from image_gallery (already flat — one filename per row)
+    gallery_rows = _fetch_all_rows("image_gallery", "image")
+    referenced = {row["image"] for row in gallery_rows if row.get("image")}
+
+    # Filenames from digimon.images (text[] column — flatten the arrays)
+    digimon_rows = _fetch_all_rows("digimon", "images")
+    for row in digimon_rows:
+        for img in row.get("images") or []:
+            fname = img.split("!")[0]   # strip thumbnail suffix if present
+            if fname:
+                referenced.add(fname)
+
+    return referenced - existing
+
+
 def upsert_image_urls(image_obj: dict[str, str]) -> None:
     """
     Upsert {filename: url} entries into the image_urls table.

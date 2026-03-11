@@ -21,6 +21,7 @@ load_dotenv(Path(__file__).parent / ".env")
 from wikimon.supabase_sync import (
     get_all_digimon_revision_dates,
     get_all_image_url_ids,
+    get_missing_image_filenames,
     upsert_digimon_batch,
     upsert_non_digimon_batch,
     upsert_image_urls,
@@ -56,7 +57,10 @@ def _run_sync(refresh_all: bool = False) -> dict:
     # Image URLs must be written before digimon batch — image_gallery.image
     # has a FK referencing image_urls.id, so the referenced rows must exist first.
     existing_url_ids = get_all_image_url_ids()
-    image_obj = sync_image_urls(digi_obj, existing_url_ids, refresh_all=refresh_all)
+    missing_filenames = get_missing_image_filenames()
+    if missing_filenames:
+        logger.info(f"Found {len(missing_filenames)} image filenames in DB with no URL entry — will backfill.")
+    image_obj = sync_image_urls(digi_obj, existing_url_ids, refresh_all=refresh_all, extra_filenames=missing_filenames)
     try:
         upsert_image_urls(image_obj)
     except Exception:

@@ -29,9 +29,16 @@ def _make_session() -> requests.Session:
     return s
 
 
-def _get_image_list(digi_obj: dict, existing_url_ids: set[str], refresh_all: bool) -> list[str]:
+def _get_image_list(
+    digi_obj: dict,
+    existing_url_ids: set[str],
+    refresh_all: bool,
+    extra_filenames: set[str] | None = None,
+) -> list[str]:
     """
-    Collect all image filenames referenced in digi_obj that need fetching.
+    Collect all image filenames that need fetching:
+    - Images from the current sync's digi_obj
+    - Any extra filenames (e.g. DB gaps found by get_missing_image_filenames)
     Returns a list of "Image:<filename>" strings ready for the API.
     """
     image_set = set()
@@ -44,6 +51,9 @@ def _get_image_list(digi_obj: dict, existing_url_ids: set[str], refresh_all: boo
             fname = entry.get("image", "")
             if fname and (refresh_all or fname not in existing_url_ids):
                 image_set.add(f"Image:{fname}")
+    # Backfill: filenames known to be missing from image_urls
+    for fname in (extra_filenames or set()):
+        image_set.add(f"Image:{fname}")
     return list(image_set)
 
 
@@ -56,14 +66,16 @@ def sync_image_urls(
     digi_obj: dict,
     existing_url_ids: set[str],
     refresh_all: bool = False,
+    extra_filenames: set[str] | None = None,
 ) -> dict[str, str]:
     """
     Fetches image filename → CDN URL mappings from wikimon for all images in
     digi_obj that are not already tracked (or all, if refresh_all=True).
+    Also fetches any extra_filenames (used to backfill DB gaps).
 
     Returns a dict {filename: url} of newly fetched / updated entries.
     """
-    image_list = _get_image_list(digi_obj, existing_url_ids, refresh_all)
+    image_list = _get_image_list(digi_obj, existing_url_ids, refresh_all, extra_filenames)
     if not image_list:
         logger.info("No new images to fetch.")
         return {}
@@ -78,7 +90,7 @@ def sync_image_urls(
         titles = "|".join(urllib.parse.quote(t) for t in chunk)
         params = f"action=query&prop=imageinfo&titles={titles}&iiprop=url&format=json"
         try:
-            resp = session.get(url=f"{WIKIMON_API_URL}?{params}", timeout=30)
+            resp = session.get(url=WIKIMON_API_URL, params=params, timeout=30)
             if not resp.ok:
                 logger.warning(f"Image URL fetch error {resp.status_code} on chunk {i}/{total_chunks}")
                 continue
