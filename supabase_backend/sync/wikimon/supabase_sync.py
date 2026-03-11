@@ -144,59 +144,72 @@ def _build_digimon_row(digi_data: dict, revision_date: str) -> dict:
 # Write helpers — Digimon
 # ---------------------------------------------------------------------------
 
-def upsert_digimon(name: str, digi_data: dict, revision_date: str) -> None:
+_BATCH_SIZE = 500
+
+
+def upsert_digimon_batch(digi_obj: dict) -> None:
     """
-    Upsert a digimon row and sync all related rows in child tables.
+    Batch upsert all digimon and their child records.
+    digi_obj: {name: data} where data may contain '_revision_date'.
+
+    Reduces API calls from ~7 per digimon to ~7 total regardless of count.
     """
+    if not digi_obj:
+        return
     db = get_db()
+    names = list(digi_obj.keys())
 
-    # Main row
-    row = _build_digimon_row(digi_data, revision_date)
-    row["id"] = name   # use the wikimon page title as PK (no encoding needed in PostgreSQL)
-    db.table("digimon").upsert(row).execute()
+    # 1. Build and batch-upsert main digimon rows
+    main_rows = []
+    for name, data in digi_obj.items():
+        revision_date = data.pop("_revision_date", "")
+        row = _build_digimon_row(data, revision_date)
+        row["id"] = name
+        main_rows.append(row)
 
-    # attack_techniques — upsert by (digimon_id, name)
-    techs = digi_data.get("attack_techniques", [])
-    if techs:
-        db.table("attack_techniques").delete().eq("digimon_id", name).execute()
-        db.table("attack_techniques").insert([
-            {
-                "digimon_id":   name,
-                "name":         t.get("name", ""),
-                "translation":  t.get("translation", ""),
-                "kanji":        t.get("kanji", ""),
-                "romaji":       t.get("romaji", ""),
-                "dub_name":     t.get("dub_name", ""),
-                "description":  t.get("description", ""),
-            }
-            for t in techs
-        ]).execute()
+    for i in range(0, len(main_rows), _BATCH_SIZE):
+        db.table("digimon").upsert(main_rows[i : i + _BATCH_SIZE]).execute()
 
-    # image_gallery — replace all
-    gallery = digi_data.get("image_gallery", [])
-    if gallery:
-        db.table("image_gallery").delete().eq("digimon_id", name).execute()
-        db.table("image_gallery").insert([
-            {
+    # 2. Delete all child records for these digimon in bulk
+    for i in range(0, len(names), _BATCH_SIZE):
+        batch = names[i : i + _BATCH_SIZE]
+        db.table("attack_techniques").delete().in_("digimon_id", batch).execute()
+        db.table("image_gallery").delete().in_("digimon_id", batch).execute()
+        db.table("evolutions").delete().in_("digimon_id", batch).execute()
+
+    # 3. Collect and batch-insert all child records
+    all_techs, all_gallery, all_evos = [], [], []
+
+    for name, data in digi_obj.items():
+        for t in data.get("attack_techniques", []):
+            all_techs.append({
+                "digimon_id":  name,
+                "name":        t.get("name", ""),
+                "translation": t.get("translation", ""),
+                "kanji":       t.get("kanji", ""),
+                "romaji":      t.get("romaji", ""),
+                "dub_name":    t.get("dub_name", ""),
+                "description": t.get("description", ""),
+            })
+        for g in data.get("image_gallery", []):
+            all_gallery.append({
                 "digimon_id": name,
                 "image":      g.get("image", ""),
                 "caption":    g.get("caption", ""),
-            }
-            for g in gallery
-        ]).execute()
+            })
+        for evo in data.get("evolve_from", []):
+            all_evos.append({**_build_evo_row(evo), "digimon_id": name, "direction": "from"})
+        for evo in data.get("evolve_to", []):
+            all_evos.append({**_build_evo_row(evo), "digimon_id": name, "direction": "to"})
 
-    # evolutions — replace all (direction injected here)
-    evo_rows = []
-    for evo in digi_data.get("evolve_from", []):
-        evo_rows.append({**_build_evo_row(evo), "digimon_id": name, "direction": "from"})
-    for evo in digi_data.get("evolve_to", []):
-        evo_rows.append({**_build_evo_row(evo), "digimon_id": name, "direction": "to"})
+    for i in range(0, len(all_techs), _BATCH_SIZE):
+        db.table("attack_techniques").insert(all_techs[i : i + _BATCH_SIZE]).execute()
+    for i in range(0, len(all_gallery), _BATCH_SIZE):
+        db.table("image_gallery").insert(all_gallery[i : i + _BATCH_SIZE]).execute()
+    for i in range(0, len(all_evos), _BATCH_SIZE):
+        db.table("evolutions").insert(all_evos[i : i + _BATCH_SIZE]).execute()
 
-    db.table("evolutions").delete().eq("digimon_id", name).execute()
-    if evo_rows:
-        db.table("evolutions").insert(evo_rows).execute()
-
-    logger.info(f"Upserted digimon: {name}")
+    logger.info(f"Batch upserted {len(names)} digimon.")
 
 
 def _build_evo_row(evo: dict) -> dict:
@@ -228,17 +241,25 @@ def delete_digimon(name: str) -> None:
 # Write helpers — Non-Digimon
 # ---------------------------------------------------------------------------
 
-def upsert_non_digimon(name: str, entity_data: dict, revision_date: str = "") -> None:
+def upsert_non_digimon_batch(non_digi_obj: dict) -> None:
+    """Batch upsert all non_digimon rows in one (or a few) API calls."""
+    if not non_digi_obj:
+        return
     db = get_db()
-    db.table("non_digimon").upsert({
-        "id":                   name,
-        "name":                 name,
-        "wikitext":             entity_data.get("wikitext", ""),
-        "redirected_names":     entity_data.get("redirected_names", []),
-        "last_scraped_revision": revision_date,
-        "last_updated":         _now(),
-    }).execute()
-    logger.info(f"Upserted non_digimon: {name}")
+    rows = [
+        {
+            "id":                   name,
+            "name":                 name,
+            "wikitext":             entity.get("wikitext", ""),
+            "redirected_names":     entity.get("redirected_names", []),
+            "last_scraped_revision": entity.get("_revision_date", ""),
+            "last_updated":         _now(),
+        }
+        for name, entity in non_digi_obj.items()
+    ]
+    for i in range(0, len(rows), _BATCH_SIZE):
+        db.table("non_digimon").upsert(rows[i : i + _BATCH_SIZE]).execute()
+    logger.info(f"Batch upserted {len(rows)} non_digimon.")
 
 
 # ---------------------------------------------------------------------------

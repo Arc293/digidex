@@ -21,8 +21,8 @@ load_dotenv(Path(__file__).parent / ".env")
 from wikimon.supabase_sync import (
     get_all_digimon_revision_dates,
     get_all_image_url_ids,
-    upsert_digimon,
-    upsert_non_digimon,
+    upsert_digimon_batch,
+    upsert_non_digimon_batch,
     upsert_image_urls,
     delete_digimon,
     ensure_universe,
@@ -53,22 +53,17 @@ def _run_sync(refresh_all: bool = False) -> dict:
         existing_non_digi={},
     )
 
-    updated_count = 0
-    for name, data in digi_obj.items():
-        revision_date = data.pop("_revision_date", "")
-        try:
-            upsert_digimon(name, data, revision_date)
-            updated_count += 1
-        except Exception:
-            logger.exception(f"Failed to upsert digimon '{name}'")
+    try:
+        upsert_digimon_batch(digi_obj)
+    except Exception:
+        logger.exception("Failed to batch upsert digimon")
+    updated_count = len(digi_obj)
 
-    non_digi_count = 0
-    for name, entity in non_digi_obj.items():
-        try:
-            upsert_non_digimon(name, entity)
-            non_digi_count += 1
-        except Exception:
-            logger.exception(f"Failed to upsert non_digimon '{name}'")
+    try:
+        upsert_non_digimon_batch(non_digi_obj)
+    except Exception:
+        logger.exception("Failed to batch upsert non_digimon")
+    non_digi_count = len(non_digi_obj)
 
     deleted_count = 0
     for name in deleted_names:
